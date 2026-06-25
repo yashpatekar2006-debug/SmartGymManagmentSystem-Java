@@ -12,6 +12,7 @@
    - Java
   - OOP conccepts
   - Collection Framework
+  - Use Html for GUI
 
 ## Author
 Yash Patekar
