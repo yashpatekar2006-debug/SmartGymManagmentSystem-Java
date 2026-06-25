@@ -73,7 +73,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .bar-fill { background: #c8a84b; height: 6px; border-radius: 20px; }
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 100; }
 .modal-overlay.show { display: flex; }
-.modal { background: #1c1c1c; border: 1px solid #333; border-radius: 12px; padding: 22px; width: 420px; }
+.modal { background: #1c1c1c; border: 1px solid #333; border-radius: 12px; padding: 22px; width: 420px; max-height: 90vh; overflow-y: auto; }
 .modal-title { color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
 .modal-close { background: none; border: none; color: #666; cursor: pointer; font-size: 20px; }
 .modal-close:hover { color: #fff; }
@@ -98,17 +98,9 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .visit-big { color: #c8a84b; font-size: 24px; font-weight: bold; }
 .info-box { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px; margin-bottom: 13px; }
 .setup-banner { background: linear-gradient(135deg, rgba(200,168,75,0.12), rgba(200,168,75,0.04)); border: 1px solid rgba(200,168,75,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-.setup-banner.connected { background: linear-gradient(135deg, rgba(99,153,34,0.12), rgba(99,153,34,0.04)); border-color: rgba(99,153,34,0.3); }
 .sync-btn { background: #c8a84b; color: #000; border: none; padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: bold; cursor: pointer; white-space: nowrap; }
 .sync-btn:hover { background: #e0b955; }
-.sync-btn.green { background: #97c459; }
-.url-input { background: #111; border: 1px solid #444; color: #ccc; padding: 8px 12px; border-radius: 7px; font-size: 12px; flex: 1; outline: none; }
-.url-input:focus { border-color: #c8a84b; }
-.spinning { animation: spin 1s linear infinite; display: inline-block; }
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; margin-right: 6px; }
-.status-dot.green { background: #97c459; }
-.status-dot.amber { background: #fac775; }
 </style>
 </head>
 <body>
@@ -126,7 +118,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
       <div class="nav-section">Actions</div>
       <div class="nav-item" onclick="openModal('register')"><i class="ti ti-user-plus"></i> Register Member</div>
       <div class="nav-item" onclick="checkExpired()"><i class="ti ti-bell-ringing"></i> Check Expired</div>
-      <div class="nav-item" onclick="syncNow()" id="sync-nav-btn"><i class="ti ti-cloud-upload"></i> Sync to Sheet</div>
+      <div class="nav-item" onclick="syncNow()"><i class="ti ti-cloud-upload"></i> Sync to Sheet</div>
       <div class="nav-item" onclick="loadFromSheet()" style="color:#85b7eb;"><i class="ti ti-cloud-download"></i> Load from Sheet</div>
       <div class="nav-section">Data</div>
       <div class="nav-item" onclick="exportData()"><i class="ti ti-download"></i> Export Backup</div>
@@ -144,11 +136,12 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
   </div>
 
   <div class="main">
-    <!-- Setup Banner -->
     <div class="setup-banner" id="setup-banner">
       <div style="flex:1;">
-        <div style="color:#c8a84b;font-size:13px;font-weight:bold;margin-bottom:4px;"><i class="ti ti-brand-google" style="font-size:14px;"></i> Google Sheets Connect karo</div>
-        <div style="color:#888;font-size:12px;">Apps Script URL paste karo — data Google Sheets madhe save hoil, saglyancha disel!</div>
+        <div style="color:#c8a84b;font-size:13px;font-weight:bold;margin-bottom:4px;">
+          <i class="ti ti-brand-google" style="font-size:14px;"></i> Google Sheets Connect karo
+        </div>
+        <div style="color:#888;font-size:12px;">Apps Script URL paste karo — data Google Sheets madhe save hoil!</div>
       </div>
       <button class="sync-btn" onclick="openModal('settings')">Setup karo</button>
     </div>
@@ -156,7 +149,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
     <div class="top-bar">
       <div>
         <div class="page-title">Dashboard</div>
-        <div class="page-sub" id="connection-sub">Perfect Fitness &mdash; Google Sheets la connect karo</div>
+        <div class="page-sub" id="connection-sub">Perfect Fitness — Google Sheets la connect karo</div>
       </div>
       <button class="add-btn" onclick="openModal('register')">
         <i class="ti ti-plus" style="font-size:14px;"></i> Register Member
@@ -165,22 +158,22 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label"><i class="ti ti-users" style="font-size:12px;margin-right:4px;"></i>Total Members</div>
+        <div class="stat-label">Total Members</div>
         <div class="stat-value" id="stat-total">0</div>
         <span class="stat-badge badge-blue">Registered</span>
       </div>
       <div class="stat-card">
-        <div class="stat-label"><i class="ti ti-circle-check" style="font-size:12px;margin-right:4px;"></i>Active</div>
+        <div class="stat-label">Active</div>
         <div class="stat-value" id="stat-active">0</div>
-        <span class="stat-badge badge-green">Valid memberships</span>
+        <span class="stat-badge badge-green">Valid</span>
       </div>
       <div class="stat-card">
-        <div class="stat-label"><i class="ti ti-circle-x" style="font-size:12px;margin-right:4px;"></i>Inactive</div>
+        <div class="stat-label">Inactive</div>
         <div class="stat-value" id="stat-inactive">0</div>
-        <span class="stat-badge badge-red">Expired memberships</span>
+        <span class="stat-badge badge-red">Expired</span>
       </div>
       <div class="stat-card">
-        <div class="stat-label"><i class="ti ti-door-enter" style="font-size:12px;margin-right:4px;"></i>Total Visits</div>
+        <div class="stat-label">Total Visits</div>
         <div class="stat-value" id="stat-visits">0</div>
         <span class="stat-badge badge-amber">All time</span>
       </div>
@@ -193,7 +186,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
           <input class="search-box" placeholder="Search name or ID..." oninput="filterMembers(this.value)" id="search-input">
         </div>
         <div id="members-list">
-          <div class="empty-state"><i class="ti ti-user-off"></i>No members yet. Register your first member!</div>
+          <div class="empty-state"><i class="ti ti-user-off"></i>No members yet!</div>
         </div>
       </div>
 
@@ -205,7 +198,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
         </div>
         <div class="detail-card">
           <div style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Plan Distribution</div>
-          <div id="plan-chart"><div style="color:#444;font-size:12px;">Register members to see plan stats</div></div>
+          <div id="plan-chart"><div style="color:#444;font-size:12px;">No data yet</div></div>
         </div>
       </div>
     </div>
@@ -213,126 +206,140 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 </div>
 
 <!-- Modal -->
-<div class="modal-overlay" id="modal">
-  <div class="modal" id="modal-box">
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
     <div class="modal-title">
       <span id="modal-title-text">Register New Member</span>
       <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
     </div>
     <div id="modal-body"></div>
-    <div class="modal-footer" id="modal-footer">
+    <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
       <button class="btn-save" onclick="handleModalSave()" id="modal-save-btn">Save</button>
     </div>
   </div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast">
+<!-- Toast — fixed HTML, no JS dependency on load -->
+<div id="toast" class="toast">
   <i class="ti ti-circle-check" style="font-size:16px;" id="toast-icon"></i>
-  <span id="toast-msg">Done!</span>
+  <span id="toast-msg"></span>
 </div>
 
 <script>
-var STORAGE_KEY = 'perfectfitness_v2';
+// ===== GLOBALS =====
 var members = [];
 var selectedId = null;
 var currentAction = 'register';
 var actionMemberId = null;
 var avColors = ['av-gold','av-blue','av-teal','av-pink'];
-var scriptUrl = localStorage.getItem('pf_script_url') || '';
+var scriptUrl = '';
+var toastTimer = null;
 
-// ===== HELPERS =====
-function getInitials(n){ return n.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
-function getAv(i){ return avColors[i%avColors.length]; }
-function fmtDate(d){ return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); }
+// Safe localStorage
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
+// Load script URL safely after DOM ready
+function initScriptUrl(){
+  scriptUrl = lsGet('pf_script_url') || '';
+  if(scriptUrl){
+    setSyncStatus('connected');
+    document.getElementById('setup-banner').style.display = 'none';
+    document.getElementById('connection-sub').textContent = 'Perfect Fitness — Google Sheets connected!';
+  }
+  var lastSync = lsGet('pf_last_sync');
+  if(lastSync){
+    var d = new Date(lastSync);
+    var el = document.getElementById('last-sync-lbl');
+    if(el) el.textContent = 'Last: ' + d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  }
+}
+
+// ===== TOAST (safe) =====
 function showToast(msg, type){
   var t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  var icons = {error:'ti-alert-circle', info:'ti-info-circle', '':'ti-circle-check'};
-  document.getElementById('toast-icon').className = 'ti ' + (icons[type||''] || 'ti-circle-check');
-  t.className = 'toast show' + (type?' '+type:'');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(function(){ t.classList.remove('show'); }, 3000);
+  var msgEl = document.getElementById('toast-msg');
+  var iconEl = document.getElementById('toast-icon');
+  if(!t || !msgEl) return;
+  msgEl.textContent = msg;
+  if(iconEl) iconEl.className = 'ti ' + (type==='error' ? 'ti-alert-circle' : type==='info' ? 'ti-info-circle' : 'ti-circle-check');
+  t.className = 'toast show' + (type ? ' '+type : '');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.className = 'toast'; }, 3000);
+}
+
+// ===== SYNC STATUS (safe) =====
+function setSyncStatus(status){
+  var dot = document.getElementById('sync-dot');
+  var lbl = document.getElementById('sync-status-lbl');
+  if(!dot || !lbl) return;
+  if(status === 'connected'){
+    dot.style.background = '#97c459';
+    lbl.innerHTML = '<span class="status-dot" style="background:#97c459;"></span><span style="color:#97c459;">Connected</span>';
+  } else if(status === 'syncing'){
+    dot.style.background = '#fac775';
+    lbl.innerHTML = '<span class="status-dot" style="background:#fac775;"></span><span style="color:#fac775;">Syncing...</span>';
+  } else {
+    dot.style.background = '#555';
+    lbl.innerHTML = '<span class="status-dot"></span><span style="color:#666;">Not configured</span>';
+  }
 }
 
 // ===== LOCAL STORAGE =====
 function saveLocal(){
-  try {
-    var toSave = members.map(function(m){
-      return { id:m.id, name:m.name, age:m.age, plan:m.plan,
-        joinDate:new Date(m.joinDate).toISOString(),
-        expiry:new Date(m.expiry).toISOString(),
-        visits:m.visits, isActive:m.isActive };
-    });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-  } catch(e){}
-}
-
-function loadLocal(){
-  try {
-    var raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
-    members = JSON.parse(raw).map(function(m){
-      return { id:m.id, name:m.name, age:m.age, plan:m.plan,
-        joinDate:new Date(m.joinDate), expiry:new Date(m.expiry),
-        visits:m.visits, isActive:m.isActive };
-    });
-  } catch(e){ members=[]; }
-}
-
-// ===== GOOGLE SHEETS SYNC =====
-function updateSyncStatus(status){
-  var dot = document.getElementById('sync-dot');
-  var lbl = document.getElementById('sync-status-lbl');
-  var sub = document.getElementById('connection-sub');
-  var banner = document.getElementById('setup-banner');
-  if(status==='connected'){
-    dot.className='status-dot green';
-    lbl.innerHTML='<span class="status-dot green"></span><span style="color:#97c459;">Connected to Sheets</span>';
-    sub.textContent='Perfect Fitness — Google Sheets connected!';
-    banner.style.display='none';
-  } else if(status==='syncing'){
-    dot.className='status-dot amber';
-    lbl.innerHTML='<span class="status-dot amber"></span><span style="color:#fac775;">Syncing...</span>';
-  } else {
-    dot.className='status-dot';
-    lbl.innerHTML='<span class="status-dot"></span><span style="color:#666;">Not configured</span>';
-    sub.textContent='Perfect Fitness — Google Sheets la connect karo';
-    banner.style.display='flex';
-  }
-}
-
-function syncNow(){
-  if(!scriptUrl){ openModal('settings'); return; }
-  updateSyncStatus('syncing');
-  showToast('Syncing to Google Sheets...', 'info');
   var toSave = members.map(function(m){
     return { id:m.id, name:m.name, age:m.age, plan:m.plan,
       joinDate:new Date(m.joinDate).toISOString(),
       expiry:new Date(m.expiry).toISOString(),
       visits:m.visits, isActive:m.isActive };
   });
-  var cbName = 'pf_cb_' + Date.now();
+  lsSet('pf_gym_v3', JSON.stringify(toSave));
+}
+
+function loadLocal(){
+  var raw = lsGet('pf_gym_v3');
+  if(!raw) return;
+  try {
+    members = JSON.parse(raw).map(function(m){
+      return { id:parseInt(m.id)||m.id, name:String(m.name), age:parseInt(m.age),
+        plan:String(m.plan), joinDate:new Date(m.joinDate),
+        expiry:new Date(m.expiry), visits:parseInt(m.visits)||0,
+        isActive: m.isActive===true||m.isActive==='true'||m.isActive==='TRUE' };
+    });
+  } catch(e){ members=[]; }
+}
+
+// ===== GOOGLE SHEETS =====
+function syncNow(){
+  if(!scriptUrl){ openModal('settings'); return; }
+  setSyncStatus('syncing');
+  showToast('Syncing to Google Sheets...','info');
+  var toSave = members.map(function(m){
+    return { id:m.id, name:m.name, age:m.age, plan:m.plan,
+      joinDate:new Date(m.joinDate).toISOString(),
+      expiry:new Date(m.expiry).toISOString(),
+      visits:m.visits, isActive:m.isActive };
+  });
+  var cbName = 'pfcb_' + Date.now();
   var s = document.createElement('script');
   window[cbName] = function(res){
-    delete window[cbName]; document.body.removeChild(s);
+    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
     if(res && res.success){
-      updateSyncStatus('connected');
-      var now = new Date();
-      localStorage.setItem('pf_last_sync', now.toISOString());
-      document.getElementById('last-sync-lbl').textContent = 'Last: ' + now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+      setSyncStatus('connected');
+      lsSet('pf_last_sync', new Date().toISOString());
+      var el = document.getElementById('last-sync-lbl');
+      if(el) el.textContent = 'Last: ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
       showToast('Synced! ' + res.count + ' members saved to Sheets!');
     } else {
-      updateSyncStatus('connected');
-      showToast('Sync failed. URL check karo.', 'error');
+      setSyncStatus('connected');
+      showToast('Sync failed — URL check karo.','error');
     }
   };
   s.onerror = function(){
-    delete window[cbName]; document.body.removeChild(s);
-    updateSyncStatus('');
-    showToast('Sync error! Script URL check karo.', 'error');
+    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
+    setSyncStatus('');
+    showToast('Sync error! Script URL check karo.','error');
   };
   s.src = scriptUrl + '?action=save&data=' + encodeURIComponent(JSON.stringify(toSave)) + '&callback=' + cbName;
   document.body.appendChild(s);
@@ -340,31 +347,31 @@ function syncNow(){
 
 function loadFromSheet(){
   if(!scriptUrl){ openModal('settings'); return; }
-  updateSyncStatus('syncing');
-  showToast('Loading from Google Sheets...', 'info');
-  var cbName = 'pf_load_' + Date.now();
+  setSyncStatus('syncing');
+  showToast('Loading from Google Sheets...','info');
+  var cbName = 'pfload_' + Date.now();
   var s = document.createElement('script');
   window[cbName] = function(res){
-    delete window[cbName]; document.body.removeChild(s);
+    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
     if(res && res.members){
       members = res.members.map(function(m){
-        return { id:parseInt(m.id), name:String(m.name), age:parseInt(m.age),
+        return { id:parseInt(m.id)||m.id, name:String(m.name), age:parseInt(m.age),
           plan:String(m.plan), joinDate:new Date(m.joinDate),
           expiry:new Date(m.expiry), visits:parseInt(m.visits)||0,
-          isActive: m.isActive==='TRUE'||m.isActive===true };
+          isActive: m.isActive===true||m.isActive==='true'||m.isActive==='TRUE' };
       });
       saveLocal(); updateStats(); filterMembers('');
-      updateSyncStatus('connected');
-      showToast(members.length + ' members loaded from Google Sheets!');
+      setSyncStatus('connected');
+      showToast(members.length + ' members loaded from Sheets!');
     } else {
-      showToast('Load failed! URL check karo.', 'error');
-      updateSyncStatus('');
+      showToast('Load failed! URL check karo.','error');
+      setSyncStatus('');
     }
   };
   s.onerror = function(){
-    delete window[cbName]; document.body.removeChild(s);
-    updateSyncStatus('');
-    showToast('Load error! Script URL check karo.', 'error');
+    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
+    setSyncStatus('');
+    showToast('Connection error! URL check karo.','error');
   };
   s.src = scriptUrl + '?action=getAll&callback=' + cbName;
   document.body.appendChild(s);
@@ -374,7 +381,8 @@ function loadFromSheet(){
 function exportData(){
   var toSave = members.map(function(m){
     return { id:m.id, name:m.name, age:m.age, plan:m.plan,
-      joinDate:new Date(m.joinDate).toISOString(), expiry:new Date(m.expiry).toISOString(),
+      joinDate:new Date(m.joinDate).toISOString(),
+      expiry:new Date(m.expiry).toISOString(),
       visits:m.visits, isActive:m.isActive };
   });
   var blob = new Blob([JSON.stringify({gym:'Perfect Fitness',members:toSave,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
@@ -392,208 +400,287 @@ function importData(event){
   reader.onload = function(e){
     try {
       var data = JSON.parse(e.target.result);
-      var imported = data.members || data;
-      members = imported.map(function(m){
-        return { id:m.id, name:m.name, age:m.age, plan:m.plan,
-          joinDate:new Date(m.joinDate), expiry:new Date(m.expiry),
-          visits:m.visits, isActive:m.isActive };
+      var arr = data.members || data;
+      members = arr.map(function(m){
+        return { id:parseInt(m.id)||m.id, name:String(m.name), age:parseInt(m.age),
+          plan:String(m.plan), joinDate:new Date(m.joinDate),
+          expiry:new Date(m.expiry), visits:parseInt(m.visits)||0,
+          isActive: m.isActive===true||m.isActive==='true'||m.isActive==='TRUE' };
       });
       saveLocal(); updateStats(); filterMembers('');
       showToast(members.length + ' members imported!');
-    } catch(err){ showToast('Invalid file!', 'error'); }
+    } catch(err){ showToast('Invalid file!','error'); }
   };
   reader.readAsText(file);
-  event.target.value='';
+  event.target.value = '';
 }
 
 // ===== STATS =====
 function updateStats(){
   var active = members.filter(function(m){return m.isActive;}).length;
   var tv = members.reduce(function(s,m){return s+m.visits;},0);
-  document.getElementById('stat-total').textContent = members.length;
-  document.getElementById('stat-active').textContent = active;
-  document.getElementById('stat-inactive').textContent = members.length-active;
-  document.getElementById('stat-visits').textContent = tv;
+  var t = document.getElementById('stat-total'); if(t) t.textContent = members.length;
+  var a = document.getElementById('stat-active'); if(a) a.textContent = active;
+  var i = document.getElementById('stat-inactive'); if(i) i.textContent = members.length - active;
+  var v = document.getElementById('stat-visits'); if(v) v.textContent = tv;
   updatePlanChart();
 }
 
 function updatePlanChart(){
-  var plans={Basic:0,Premium:0,Elite:0};
-  members.forEach(function(m){if(plans[m.plan]!==undefined)plans[m.plan]++;});
-  var total=members.length||1;
-  var colors={Basic:'#85b7eb',Premium:'#c8a84b',Elite:'#5dcaa5'};
-  document.getElementById('plan-chart').innerHTML = Object.keys(plans).map(function(p){
-    var pct=Math.round((plans[p]/total)*100);
-    return '<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="color:#aaa;font-size:12px;">'+p+'</span><span style="color:#666;font-size:12px;">'+plans[p]+' member'+(plans[p]!=1?'s':'')+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+colors[p]+';"></div></div></div>';
+  var plans = {Basic:0,Premium:0,Elite:0};
+  members.forEach(function(m){ if(plans[m.plan]!==undefined) plans[m.plan]++; });
+  var total = members.length || 1;
+  var colors = {Basic:'#85b7eb',Premium:'#c8a84b',Elite:'#5dcaa5'};
+  var el = document.getElementById('plan-chart');
+  if(!el) return;
+  el.innerHTML = Object.keys(plans).map(function(p){
+    var pct = Math.round((plans[p]/total)*100);
+    return '<div style="margin-bottom:10px;">'
+      +'<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'
+      +'<span style="color:#aaa;font-size:12px;">'+p+'</span>'
+      +'<span style="color:#666;font-size:12px;">'+plans[p]+' member'+(plans[p]!=1?'s':'')+'</span></div>'
+      +'<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+colors[p]+';"></div></div></div>';
   }).join('');
 }
 
 // ===== LIST =====
+function getInitials(n){ return n.split(' ').slice(0,2).map(function(w){return w[0]||'';}).join('').toUpperCase(); }
+function getAv(i){ return avColors[i % avColors.length]; }
+function fmtDate(d){ return new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); }
+
 function renderList(list){
+  var el = document.getElementById('members-list');
+  if(!el) return;
   if(!list.length){
-    document.getElementById('members-list').innerHTML='<div class="empty-state"><i class="ti ti-search"></i>No members found</div>';
+    el.innerHTML = '<div class="empty-state"><i class="ti ti-search"></i>No members found</div>';
     return;
   }
-  document.getElementById('members-list').innerHTML = list.map(function(m){
-    var idx=members.indexOf(m);
+  el.innerHTML = list.map(function(m){
+    var idx = members.indexOf(m);
     return '<div class="member-row'+(m.id===selectedId?' selected':'')+'" onclick="selectMember('+m.id+')">'
       +'<div class="avatar '+getAv(idx)+'">'+getInitials(m.name)+'</div>'
-      +'<div class="member-info"><div class="member-name">'+m.name+'</div>'
-      +'<div class="member-plan-text">ID #'+m.id+' &middot; '+m.plan+' &middot; '+m.visits+' visit'+(m.visits!=1?'s':'')+'</div></div>'
+      +'<div class="member-info">'
+      +'<div class="member-name">'+m.name+'</div>'
+      +'<div class="member-plan-text">ID #'+m.id+' · '+m.plan+' · '+m.visits+' visit'+(m.visits!=1?'s':'')+'</div>'
+      +'</div>'
       +'<span class="member-status '+(m.isActive?'status-active':'status-inactive')+'">'+(m.isActive?'Active':'Expired')+'</span>'
       +'</div>';
   }).join('');
 }
 
 function filterMembers(q){
-  q=q.toLowerCase();
-  renderList(members.filter(function(m){return m.name.toLowerCase().includes(q)||String(m.id).includes(q);}));
+  q = (q||'').toLowerCase();
+  renderList(members.filter(function(m){ return m.name.toLowerCase().includes(q) || String(m.id).includes(q); }));
 }
 
 // ===== MEMBER DETAIL =====
 function selectMember(id){
-  selectedId=id;
-  var m=members.find(function(x){return x.id===id;});
+  selectedId = id;
+  var m = members.find(function(x){ return x.id===id; });
   if(!m) return;
-  var idx=members.indexOf(m);
-  var now=new Date();
-  var daysLeft=Math.max(0,Math.round((new Date(m.expiry)-now)/86400000));
-  document.getElementById('detail-panel').innerHTML=
+  var idx = members.indexOf(m);
+  var daysLeft = Math.max(0, Math.round((new Date(m.expiry)-new Date())/86400000));
+  var el = document.getElementById('detail-panel');
+  if(!el) return;
+  el.innerHTML =
     '<div class="detail-header">'
     +'<div class="avatar '+getAv(idx)+'" style="width:44px;height:44px;font-size:15px;">'+getInitials(m.name)+'</div>'
-    +'<div><div class="detail-name">'+m.name+'</div><span class="detail-plan-badge">'+m.plan+' Plan</span></div></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-id" style="font-size:13px;"></i> Member ID</span><span class="detail-val">#'+m.id+'</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-user" style="font-size:13px;"></i> Age</span><span class="detail-val">'+m.age+' yrs</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-calendar" style="font-size:13px;"></i> Joined</span><span class="detail-val">'+fmtDate(m.joinDate)+'</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-calendar-event" style="font-size:13px;"></i> Expires</span><span class="detail-val" style="color:'+(daysLeft<7?'#f09595':'#97c459')+';">'+fmtDate(m.expiry)+'</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-clock" style="font-size:13px;"></i> Days Left</span><span class="detail-val">'+daysLeft+' days</span></div>'
-    +'<div class="detail-row" style="border-bottom:none;"><span class="detail-lbl"><i class="ti ti-door-enter" style="font-size:13px;"></i> Total Visits</span><span class="visit-big">'+m.visits+'</span></div>'
+    +'<div><div class="detail-name">'+m.name+'</div><span class="detail-plan-badge">'+m.plan+' Plan</span></div>'
+    +'</div>'
+    +'<div class="detail-row"><span class="detail-lbl">Member ID</span><span class="detail-val">#'+m.id+'</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl">Age</span><span class="detail-val">'+m.age+' yrs</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl">Joined</span><span class="detail-val">'+fmtDate(m.joinDate)+'</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl">Expires</span><span class="detail-val" style="color:'+(daysLeft<7?'#f09595':'#97c459')+';">'+fmtDate(m.expiry)+'</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl">Days Left</span><span class="detail-val">'+daysLeft+' days</span></div>'
+    +'<div class="detail-row" style="border-bottom:none;"><span class="detail-lbl">Total Visits</span><span class="visit-big">'+m.visits+'</span></div>'
     +'<div class="bar-track"><div class="bar-fill" style="width:'+Math.min(100,m.visits*5)+'%;"></div></div>'
     +'<div class="action-grid">'
-    +'<button class="action-btn primary" onclick="recordVisit('+m.id+')"><i class="ti ti-door-enter" style="font-size:14px;"></i>Record Visit</button>'
-    +'<button class="action-btn primary" onclick="openModal(\'renew\','+m.id+')"><i class="ti ti-refresh" style="font-size:14px;"></i>Renew</button>'
-    +'<button class="action-btn" onclick="openModal(\'upgrade\','+m.id+')"><i class="ti ti-arrow-up" style="font-size:14px;"></i>Upgrade Plan</button>'
-    +'<button class="action-btn danger" onclick="deactivateMember('+m.id+')"><i class="ti ti-user-off" style="font-size:14px;"></i>Deactivate</button>'
+    +'<button class="action-btn primary" onclick="recordVisit('+m.id+')"><i class="ti ti-door-enter"></i> Visit</button>'
+    +'<button class="action-btn primary" onclick="openModal(\'renew\','+m.id+')"><i class="ti ti-refresh"></i> Renew</button>'
+    +'<button class="action-btn" onclick="openModal(\'upgrade\','+m.id+')"><i class="ti ti-arrow-up"></i> Upgrade</button>'
+    +'<button class="action-btn danger" onclick="deactivateMember('+m.id+')"><i class="ti ti-user-off"></i> Deactivate</button>'
     +'</div>';
-  filterMembers(document.getElementById('search-input').value);
+  filterMembers(document.getElementById('search-input') ? document.getElementById('search-input').value : '');
 }
 
 function recordVisit(id){
-  var m=members.find(function(x){return x.id===id;});
+  var m = members.find(function(x){ return x.id===id; });
   if(!m) return;
-  if(!m.isActive){ showToast('Membership inactive!', 'error'); return; }
+  if(!m.isActive){ showToast('Membership inactive!','error'); return; }
   m.visits++; saveLocal(); updateStats(); selectMember(id);
   if(scriptUrl) syncNow();
   showToast('Visit recorded! Total: '+m.visits);
 }
 
 function deactivateMember(id){
-  var m=members.find(function(x){return x.id===id;});
+  var m = members.find(function(x){ return x.id===id; });
   if(!m) return;
-  m.isActive=false; saveLocal(); updateStats(); selectMember(id);
+  m.isActive = false; saveLocal(); updateStats(); selectMember(id);
   if(scriptUrl) syncNow();
   showToast(m.name+' deactivated.');
 }
 
 function checkExpired(){
-  var now=new Date(); var count=0;
-  members.forEach(function(m){ if(now>new Date(m.expiry)&&m.isActive){ m.isActive=false; count++; } });
+  var now = new Date(); var count = 0;
+  members.forEach(function(m){ if(now > new Date(m.expiry) && m.isActive){ m.isActive=false; count++; } });
   saveLocal(); updateStats();
   if(selectedId) selectMember(selectedId);
-  filterMembers(document.getElementById('search-input').value);
+  filterMembers('');
   if(scriptUrl && count>0) syncNow();
   showToast(count>0 ? count+' member(s) expired!' : 'Sagle memberships ok!');
 }
 
 // ===== MODAL =====
 function openModal(action, memberId){
-  currentAction=action; actionMemberId=memberId||null;
-  var titleEl=document.getElementById('modal-title-text');
-  var bodyEl=document.getElementById('modal-body');
-  var saveBtn=document.getElementById('modal-save-btn');
-  var footer=document.getElementById('modal-footer');
-  footer.style.display='flex';
+  currentAction = action;
+  actionMemberId = memberId || null;
+  var titleEl = document.getElementById('modal-title-text');
+  var bodyEl = document.getElementById('modal-body');
+  var saveBtn = document.getElementById('modal-save-btn');
+  var overlay = document.getElementById('modal-overlay');
+  if(!titleEl || !bodyEl || !overlay) return;
 
-  if(action==='register'){
-    titleEl.textContent='Register New Member';
-    saveBtn.textContent='Register Member';
-    bodyEl.innerHTML='<div class="form-row"><div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="inp-id" placeholder="e.g. 101"></div><div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="inp-age" placeholder="Min. 16"></div></div><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="inp-name" placeholder="Member\'s full name"></div><div class="form-group"><label class="form-label">Membership Plan</label><select class="form-select" id="inp-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
-  } else if(action==='renew'){
-    var m=members.find(function(x){return x.id===memberId;});
-    titleEl.textContent='Renew Membership';
-    saveBtn.textContent='Renew +30 Days';
-    bodyEl.innerHTML='<div class="info-box"><div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div><div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan+' Plan':'')+' &middot; Expiry: '+(m?fmtDate(m.expiry):'')+'</div></div><div style="color:#888;font-size:13px;">Renewing will extend membership by 30 days and reactivate.</div>';
-  } else if(action==='upgrade'){
-    titleEl.textContent='Upgrade Plan';
-    saveBtn.textContent='Update Plan';
-    bodyEl.innerHTML='<div class="form-group"><label class="form-label">New Plan</label><select class="form-select" id="inp-upgrade-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
-  } else if(action==='settings'){
-    titleEl.textContent='Google Sheets Settings';
-    saveBtn.textContent='Save & Test Connection';
-    bodyEl.innerHTML='<div style="color:#888;font-size:12px;margin-bottom:14px;line-height:1.7;">Apps Script deploy karnyasaathi:<br>1. Google Sheets → Extensions → Apps Script<br>2. Code paste karo → Save<br>3. Deploy → New Deployment → Web App<br>4. "Anyone" access dya → Deploy → URL copy karo</div><div class="form-group"><label class="form-label">Apps Script Web App URL</label><input class="form-input" id="inp-url" placeholder="https://script.google.com/macros/s/..." value="'+scriptUrl+'"></div>';
+  if(action === 'register'){
+    titleEl.textContent = 'Register New Member';
+    saveBtn.textContent = 'Register Member';
+    bodyEl.innerHTML =
+      '<div class="form-row">'
+      +'<div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="inp-id" placeholder="e.g. 101"></div>'
+      +'<div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="inp-age" placeholder="Min. 16"></div>'
+      +'</div>'
+      +'<div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="inp-name" placeholder="Member\'s full name"></div>'
+      +'<div class="form-group"><label class="form-label">Membership Plan</label>'
+      +'<select class="form-select" id="inp-plan">'
+      +'<option value="">Select plan...</option>'
+      +'<option value="Basic">Basic - Rs.999/month</option>'
+      +'<option value="Premium">Premium - Rs.1,799/month</option>'
+      +'<option value="Elite">Elite - Rs.2,999/month</option>'
+      +'</select></div>';
+
+  } else if(action === 'renew'){
+    var m = members.find(function(x){ return x.id===memberId; });
+    titleEl.textContent = 'Renew Membership';
+    saveBtn.textContent = 'Renew +30 Days';
+    bodyEl.innerHTML =
+      '<div class="info-box">'
+      +'<div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div>'
+      +'<div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan+' Plan':'')+' · Expiry: '+(m?fmtDate(m.expiry):'')+'</div>'
+      +'</div>'
+      +'<div style="color:#888;font-size:13px;">Renewing will extend membership by 30 days and reactivate.</div>';
+
+  } else if(action === 'upgrade'){
+    titleEl.textContent = 'Upgrade Plan';
+    saveBtn.textContent = 'Update Plan';
+    bodyEl.innerHTML =
+      '<div class="form-group"><label class="form-label">New Plan</label>'
+      +'<select class="form-select" id="inp-upgrade-plan">'
+      +'<option value="">Select plan...</option>'
+      +'<option value="Basic">Basic - Rs.999/month</option>'
+      +'<option value="Premium">Premium - Rs.1,799/month</option>'
+      +'<option value="Elite">Elite - Rs.2,999/month</option>'
+      +'</select></div>';
+
+  } else if(action === 'settings'){
+    titleEl.textContent = 'Google Sheets Settings';
+    saveBtn.textContent = 'Save & Connect';
+    bodyEl.innerHTML =
+      '<div style="background:#111;border:1px solid #2a2a2a;border-radius:8px;padding:14px;margin-bottom:14px;font-size:12px;color:#888;line-height:1.8;">'
+      +'<b style="color:#c8a84b;">Apps Script Deploy Steps:</b><br>'
+      +'1. Google Sheets → Extensions → Apps Script<br>'
+      +'2. Code paste karo → Save (Ctrl+S)<br>'
+      +'3. Deploy → New Deployment → Web App<br>'
+      +'4. Execute as: <b style="color:#ccc;">Me</b> | Access: <b style="color:#ccc;">Anyone</b><br>'
+      +'5. Deploy → URL copy karo → yeth paste karo'
+      +'</div>'
+      +'<div class="form-group"><label class="form-label">Apps Script Web App URL</label>'
+      +'<input class="form-input" id="inp-url" placeholder="https://script.google.com/macros/s/..." value="'+scriptUrl+'">'
+      +'</div>';
   }
-  document.getElementById('modal').classList.add('show');
+  overlay.classList.add('show');
 }
 
-function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+function closeModal(){
+  var overlay = document.getElementById('modal-overlay');
+  if(overlay) overlay.classList.remove('show');
+}
 
 function handleModalSave(){
-  if(currentAction==='register'){
-    var id=parseInt(document.getElementById('inp-id').value);
-    var age=parseInt(document.getElementById('inp-age').value);
-    var name=document.getElementById('inp-name').value.trim();
-    var plan=document.getElementById('inp-plan').value;
+  if(currentAction === 'register'){
+    var idEl = document.getElementById('inp-id');
+    var ageEl = document.getElementById('inp-age');
+    var nameEl = document.getElementById('inp-name');
+    var planEl = document.getElementById('inp-plan');
+    if(!idEl||!ageEl||!nameEl||!planEl) return;
+    var id = parseInt(idEl.value);
+    var age = parseInt(ageEl.value);
+    var name = nameEl.value.trim();
+    var plan = planEl.value;
     if(!id||id<=0){ showToast('Valid ID enter karo!','error'); return; }
-    if(members.find(function(m){return m.id===id;})){ showToast('ID already exists!','error'); return; }
+    if(members.find(function(m){ return m.id===id; })){ showToast('ID already exists!','error'); return; }
     if(!name){ showToast('Name enter karo!','error'); return; }
     if(!age||age<16){ showToast('Age 16+ pahije!','error'); return; }
     if(!plan){ showToast('Plan select karo!','error'); return; }
-    var now=new Date();
-    var exp=new Date(now); exp.setDate(exp.getDate()+30);
-    members.push({id:id,name:name,age:age,plan:plan,joinDate:now,expiry:exp,visits:0,isActive:true});
+    var now = new Date();
+    var exp = new Date(now); exp.setDate(exp.getDate()+30);
+    members.push({id:id, name:name, age:age, plan:plan, joinDate:now, expiry:exp, visits:0, isActive:true});
     saveLocal(); updateStats(); filterMembers(''); closeModal();
     if(scriptUrl) syncNow();
     showToast(name+' registered successfully!');
-  } else if(currentAction==='renew'){
-    var m=members.find(function(x){return x.id===actionMemberId;});
-    if(m){ new Date(m.expiry).setDate(new Date(m.expiry).getDate()+30);
-      m.expiry=new Date(new Date(m.expiry).setDate(new Date(m.expiry).getDate()+30));
-      // Simpler approach:
-      var newExp = new Date(m.expiry); newExp.setDate(newExp.getDate()+30); m.expiry=newExp;
-      m.isActive=true; saveLocal(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal();
+
+  } else if(currentAction === 'renew'){
+    var m = members.find(function(x){ return x.id===actionMemberId; });
+    if(m){
+      var newExp = new Date(m.expiry); newExp.setDate(newExp.getDate()+30); m.expiry = newExp;
+      m.isActive = true; saveLocal(); updateStats();
+      if(selectedId===m.id) selectMember(m.id);
+      closeModal();
       if(scriptUrl) syncNow();
-      showToast('Membership renewed!'); }
-  } else if(currentAction==='upgrade'){
-    var np=document.getElementById('inp-upgrade-plan').value;
+      showToast('Membership renewed for '+m.name+'!');
+    }
+
+  } else if(currentAction === 'upgrade'){
+    var npEl = document.getElementById('inp-upgrade-plan');
+    if(!npEl){ return; }
+    var np = npEl.value;
     if(!np){ showToast('Plan select karo!','error'); return; }
-    var m=members.find(function(x){return x.id===actionMemberId;});
-    if(m){ m.plan=np; saveLocal(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal();
+    var m = members.find(function(x){ return x.id===actionMemberId; });
+    if(m){
+      m.plan = np; saveLocal(); updateStats();
+      if(selectedId===m.id) selectMember(m.id);
+      closeModal();
       if(scriptUrl) syncNow();
-      showToast('Plan upgraded to '+np+'!'); }
-  } else if(currentAction==='settings'){
-    var url=document.getElementById('inp-url').value.trim();
+      showToast('Plan upgraded to '+np+'!');
+    }
+
+  } else if(currentAction === 'settings'){
+    var urlEl = document.getElementById('inp-url');
+    if(!urlEl) return;
+    var url = urlEl.value.trim();
     if(!url){ showToast('URL enter karo!','error'); return; }
-    scriptUrl=url; localStorage.setItem('pf_script_url',url);
+    scriptUrl = url; lsSet('pf_script_url', url);
     closeModal();
+    document.getElementById('setup-banner').style.display = 'none';
+    document.getElementById('connection-sub').textContent = 'Perfect Fitness — Google Sheets connected!';
     loadFromSheet();
   }
 }
 
 function setActiveNav(el){
-  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
   el.classList.add('active');
 }
 
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-
-// ===== INIT =====
-loadLocal();
-updateStats();
-filterMembers('');
-if(scriptUrl){ updateSyncStatus('connected'); document.getElementById('setup-banner').style.display='none'; }
-var lastSync=localStorage.getItem('pf_last_sync');
-if(lastSync){ var d=new Date(lastSync); document.getElementById('last-sync-lbl').textContent='Last: '+d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}); }
-if(members.length>0) showToast(members.length+' members loaded!');
+// ===== INIT (after DOM ready) =====
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('modal-overlay').addEventListener('click', function(e){
+    if(e.target === this) closeModal();
+  });
+  loadLocal();
+  initScriptUrl();
+  updateStats();
+  filterMembers('');
+  if(members.length > 0) showToast(members.length+' members loaded!');
+});
 </script>
 </body>
 </html>
