@@ -9,17 +9,16 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-height: 100vh; }
 .app { display: flex; min-height: 100vh; }
-.sidebar { width: 210px; background: #1a1a1a; border-right: 1px solid #2a2a2a; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; }
+.sidebar { width: 210px; background: #1a1a1a; border-right: 1px solid #2a2a2a; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 10; }
 .sidebar-logo { padding: 20px 16px 16px; border-bottom: 1px solid #2a2a2a; }
 .gym-icon { width: 38px; height: 38px; background: #c8a84b; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
 .gym-name { color: #fff; font-size: 14px; font-weight: bold; }
 .gym-sub { color: #666; font-size: 11px; margin-top: 2px; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; color: #888; font-size: 13px; border-left: 3px solid transparent; transition: all 0.15s; text-decoration: none; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; color: #888; font-size: 13px; border-left: 3px solid transparent; transition: all 0.15s; }
 .nav-item:hover { color: #ddd; background: #222; }
 .nav-item.active { color: #c8a84b; background: rgba(200,168,75,0.08); border-left: 3px solid #c8a84b; }
 .nav-item i { font-size: 17px; }
 .nav-section { color: #555; font-size: 10px; padding: 10px 16px 4px; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid #2a2a2a; margin-top: 8px; }
-.gym-status { margin: 16px; background: rgba(200,168,75,0.08); border: 1px solid rgba(200,168,75,0.2); border-radius: 8px; padding: 10px 12px; }
 .main { margin-left: 210px; padding: 24px; flex: 1; }
 .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
 .page-title { color: #fff; font-size: 20px; font-weight: bold; }
@@ -97,16 +96,15 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .empty-state i { font-size: 36px; display: block; margin-bottom: 10px; }
 .visit-big { color: #c8a84b; font-size: 24px; font-weight: bold; }
 .info-box { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px; margin-bottom: 13px; }
-@media (max-width: 900px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .content-grid { grid-template-columns: 1fr; }
-  .sidebar { width: 60px; }
-  .sidebar .gym-name, .sidebar .gym-sub, .sidebar .nav-item span, .nav-section, .gym-status { display: none; }
-  .main { margin-left: 60px; }
-}
+.save-indicator { position: fixed; top: 14px; right: 20px; background: rgba(29,158,117,0.15); border: 1px solid rgba(29,158,117,0.3); color: #5dcaa5; padding: 5px 12px; border-radius: 20px; font-size: 11px; display: none; align-items: center; gap: 6px; z-index: 50; }
+.save-indicator.show { display: flex; }
 </style>
 </head>
 <body>
+
+<div class="save-indicator" id="save-indicator">
+  <i class="ti ti-device-floppy" style="font-size:13px;"></i> Data Saved
+</div>
 
 <div class="app">
   <div class="sidebar">
@@ -116,16 +114,22 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
       <div class="gym-sub">Management System</div>
     </div>
     <div style="margin-top:8px;">
-      <div class="nav-item active" onclick="setActiveNav(this)"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></div>
-      <div class="nav-item" onclick="setActiveNav(this)"><i class="ti ti-users"></i><span>Members</span></div>
-      <div class="nav-item" onclick="setActiveNav(this)"><i class="ti ti-calendar-check"></i><span>Visits</span></div>
+      <div class="nav-item active" onclick="setActiveNav(this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+      <div class="nav-item" onclick="setActiveNav(this)"><i class="ti ti-users"></i> Members</div>
       <div class="nav-section">Quick Actions</div>
-      <div class="nav-item" onclick="openModal('register')"><i class="ti ti-user-plus"></i><span>Register Member</span></div>
-      <div class="nav-item" onclick="checkExpired()"><i class="ti ti-bell-ringing"></i><span>Check Expired</span></div>
+      <div class="nav-item" onclick="openModal('register')"><i class="ti ti-user-plus"></i> Register Member</div>
+      <div class="nav-item" onclick="checkExpired()"><i class="ti ti-bell-ringing"></i> Check Expired</div>
+      <div class="nav-item" onclick="exportData()" style="color:#85b7eb;"><i class="ti ti-download"></i> Export Backup</div>
+      <div class="nav-item" onclick="document.getElementById('import-file').click()" style="color:#85b7eb;"><i class="ti ti-upload"></i> Import Backup</div>
+      <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importData(event)">
+      <div class="nav-item" onclick="confirmClearData()" style="color:#f09595;"><i class="ti ti-trash"></i> Clear All Data</div>
     </div>
-    <div class="gym-status" style="position:absolute;bottom:16px;left:0;right:0;margin:0 12px;">
-      <div style="color:#c8a84b;font-size:11px;font-weight:bold;">Gym Status</div>
-      <div style="color:#666;font-size:11px;margin-top:3px;">Open &middot; 6 AM &ndash; 10 PM</div>
+    <div style="position:absolute;bottom:16px;left:0;right:0;padding:0 12px;">
+      <div style="background:rgba(200,168,75,0.08);border:1px solid rgba(200,168,75,0.2);border-radius:8px;padding:10px 12px;">
+        <div style="color:#c8a84b;font-size:11px;font-weight:bold;">Gym Status</div>
+        <div style="color:#666;font-size:11px;margin-top:3px;">Open &middot; 6 AM &ndash; 10 PM</div>
+        <div style="color:#555;font-size:10px;margin-top:4px;" id="last-saved-lbl"></div>
+      </div>
     </div>
   </div>
 
@@ -133,7 +137,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
     <div class="top-bar">
       <div>
         <div class="page-title">Dashboard</div>
-        <div class="page-sub">Perfect Fitness Overview</div>
+        <div class="page-sub">Perfect Fitness &mdash; Data auto-saved locally</div>
       </div>
       <button class="add-btn" onclick="openModal('register')">
         <i class="ti ti-plus" style="font-size:14px;"></i> Register Member
@@ -170,18 +174,14 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
           <input class="search-box" placeholder="Search name or ID..." oninput="filterMembers(this.value)" id="search-input">
         </div>
         <div id="members-list">
-          <div class="empty-state">
-            <i class="ti ti-user-off"></i>
-            No members yet. Register your first member!
-          </div>
+          <div class="empty-state"><i class="ti ti-user-off"></i>No members yet. Register your first member!</div>
         </div>
       </div>
 
       <div class="right-panel">
         <div class="detail-card" id="detail-panel">
           <div class="empty-state" style="padding:28px 0;">
-            <i class="ti ti-id-badge"></i>
-            Select a member to view details
+            <i class="ti ti-id-badge"></i>Select a member to view details
           </div>
         </div>
         <div class="detail-card">
@@ -215,22 +215,128 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 </div>
 
 <script>
+var STORAGE_KEY = 'perfectfitness_members';
 var members = [];
 var selectedId = null;
 var currentAction = 'register';
 var actionMemberId = null;
 var avColors = ['av-gold','av-blue','av-teal','av-pink'];
 
+// ===== LOCAL STORAGE SAVE/LOAD =====
+function saveToStorage() {
+  try {
+    // Convert Date objects to ISO strings for JSON storage
+    var toSave = members.map(function(m) {
+      return {
+        id: m.id, name: m.name, age: m.age, plan: m.plan,
+        joinDate: m.joinDate.toISOString(),
+        expiry: m.expiry.toISOString(),
+        visits: m.visits, isActive: m.isActive
+      };
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    localStorage.setItem(STORAGE_KEY + '_saved', new Date().toISOString());
+    showSaveIndicator();
+    updateLastSavedLabel();
+  } catch(e) {
+    console.error('Save failed:', e);
+  }
+}
+
+function loadFromStorage() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    var parsed = JSON.parse(raw);
+    members = parsed.map(function(m) {
+      return {
+        id: m.id, name: m.name, age: m.age, plan: m.plan,
+        joinDate: new Date(m.joinDate),
+        expiry: new Date(m.expiry),
+        visits: m.visits, isActive: m.isActive
+      };
+    });
+  } catch(e) {
+    members = [];
+    console.error('Load failed:', e);
+  }
+}
+
+function showSaveIndicator() {
+  var el = document.getElementById('save-indicator');
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(function(){ el.classList.remove('show'); }, 2000);
+}
+
+function updateLastSavedLabel() {
+  var saved = localStorage.getItem(STORAGE_KEY + '_saved');
+  var lbl = document.getElementById('last-saved-lbl');
+  if (saved && lbl) {
+    var d = new Date(saved);
+    lbl.textContent = 'Saved: ' + d.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+  }
+}
+
+// ===== EXPORT / IMPORT / CLEAR =====
+function exportData() {
+  var toSave = members.map(function(m) {
+    return { id:m.id, name:m.name, age:m.age, plan:m.plan,
+      joinDate:m.joinDate.toISOString(), expiry:m.expiry.toISOString(),
+      visits:m.visits, isActive:m.isActive };
+  });
+  var blob = new Blob([JSON.stringify({gym:'Perfect Fitness', members:toSave, exportedAt:new Date().toISOString()}, null, 2)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'perfectfitness_backup_' + new Date().toLocaleDateString('en-IN').replace(/\//g,'-') + '.json';
+  a.click();
+  showToast('Backup exported successfully!');
+}
+
+function importData(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      var imported = data.members || data;
+      members = imported.map(function(m) {
+        return { id:m.id, name:m.name, age:m.age, plan:m.plan,
+          joinDate:new Date(m.joinDate), expiry:new Date(m.expiry),
+          visits:m.visits, isActive:m.isActive };
+      });
+      saveToStorage(); updateStats(); filterMembers('');
+      showToast(members.length + ' members imported successfully!');
+    } catch(err) {
+      showToast('Import failed! Invalid file.', true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function confirmClearData() {
+  if (confirm('Sagle data delete hoil! Sure aahas ka?\n\nHi action undo hot nahi.')) {
+    members = []; selectedId = null;
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY + '_saved');
+    updateStats(); filterMembers('');
+    document.getElementById('detail-panel').innerHTML = '<div class="empty-state" style="padding:28px 0;"><i class="ti ti-id-badge"></i>Select a member to view details</div>';
+    showToast('All data cleared!');
+  }
+}
+
+// ===== CORE FUNCTIONS =====
 function getInitials(n){ return n.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
 function getAv(i){ return avColors[i % avColors.length]; }
 function fmtDate(d){ return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); }
 
 function showToast(msg, isError){
   var t = document.getElementById('toast');
-  var ic = document.getElementById('toast-icon');
   document.getElementById('toast-msg').textContent = msg;
   t.className = 'toast show' + (isError?' error':'');
-  ic.className = 'ti ' + (isError ? 'ti-alert-circle' : 'ti-circle-check');
+  document.getElementById('toast-icon').className = 'ti ' + (isError?'ti-alert-circle':'ti-circle-check');
   clearTimeout(t._timer);
   t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2800);
 }
@@ -262,17 +368,15 @@ function renderList(list){
     document.getElementById('members-list').innerHTML = '<div class="empty-state"><i class="ti ti-search"></i>No members found</div>';
     return;
   }
-  var html = list.map(function(m){
+  document.getElementById('members-list').innerHTML = list.map(function(m){
     var idx = members.indexOf(m);
-    var sel = m.id === selectedId;
-    return '<div class="member-row'+(sel?' selected':'')+'" onclick="selectMember('+m.id+')">'
+    return '<div class="member-row'+(m.id===selectedId?' selected':'')+'" onclick="selectMember('+m.id+')">'
       +'<div class="avatar '+getAv(idx)+'">'+getInitials(m.name)+'</div>'
       +'<div class="member-info"><div class="member-name">'+m.name+'</div>'
       +'<div class="member-plan-text">ID #'+m.id+' &middot; '+m.plan+' &middot; '+m.visits+' visit'+(m.visits!=1?'s':'')+'</div></div>'
       +'<span class="member-status '+(m.isActive?'status-active':'status-inactive')+'">'+(m.isActive?'Active':'Expired')+'</span>'
       +'</div>';
   }).join('');
-  document.getElementById('members-list').innerHTML = html;
 }
 
 function filterMembers(q){
@@ -286,50 +390,49 @@ function selectMember(id){
   if(!m) return;
   var idx = members.indexOf(m);
   var now = new Date();
-  var daysLeft = Math.max(0, Math.round((m.expiry - now)/86400000));
-  var html = '<div class="detail-header">'
+  var daysLeft = Math.max(0, Math.round((m.expiry-now)/86400000));
+  document.getElementById('detail-panel').innerHTML =
+    '<div class="detail-header">'
     +'<div class="avatar '+getAv(idx)+'" style="width:44px;height:44px;font-size:15px;">'+getInitials(m.name)+'</div>'
-    +'<div><div class="detail-name">'+m.name+'</div><span class="detail-plan-badge">'+m.plan+' Plan</span></div>'
-    +'</div>'
+    +'<div><div class="detail-name">'+m.name+'</div><span class="detail-plan-badge">'+m.plan+' Plan</span></div></div>'
     +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-id" style="font-size:13px;"></i> Member ID</span><span class="detail-val">#'+m.id+'</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-user" style="font-size:13px;"></i> Age</span><span class="detail-val">'+m.age+' years</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-user" style="font-size:13px;"></i> Age</span><span class="detail-val">'+m.age+' yrs</span></div>'
     +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-calendar" style="font-size:13px;"></i> Joined</span><span class="detail-val">'+fmtDate(m.joinDate)+'</span></div>'
     +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-calendar-event" style="font-size:13px;"></i> Expires</span><span class="detail-val" style="color:'+(daysLeft<7?'#f09595':'#97c459')+';">'+fmtDate(m.expiry)+'</span></div>'
     +'<div class="detail-row"><span class="detail-lbl"><i class="ti ti-clock" style="font-size:13px;"></i> Days Left</span><span class="detail-val">'+daysLeft+' days</span></div>'
     +'<div class="detail-row" style="border-bottom:none;"><span class="detail-lbl"><i class="ti ti-door-enter" style="font-size:13px;"></i> Total Visits</span><span class="visit-big">'+m.visits+'</span></div>'
-    +'<div class="bar-track" style="margin-top:6px;"><div class="bar-fill" style="width:'+Math.min(100,m.visits*5)+'%;"></div></div>'
+    +'<div class="bar-track"><div class="bar-fill" style="width:'+Math.min(100,m.visits*5)+'%;"></div></div>'
     +'<div class="action-grid">'
     +'<button class="action-btn primary" onclick="recordVisit('+m.id+')"><i class="ti ti-door-enter" style="font-size:14px;"></i>Record Visit</button>'
     +'<button class="action-btn primary" onclick="openModal(\'renew\','+m.id+')"><i class="ti ti-refresh" style="font-size:14px;"></i>Renew</button>'
     +'<button class="action-btn" onclick="openModal(\'upgrade\','+m.id+')"><i class="ti ti-arrow-up" style="font-size:14px;"></i>Upgrade Plan</button>'
     +'<button class="action-btn danger" onclick="deactivateMember('+m.id+')"><i class="ti ti-user-off" style="font-size:14px;"></i>Deactivate</button>'
     +'</div>';
-  document.getElementById('detail-panel').innerHTML = html;
   filterMembers(document.getElementById('search-input').value);
 }
 
 function recordVisit(id){
   var m = members.find(function(x){return x.id===id;});
   if(!m) return;
-  if(!m.isActive){ showToast('Membership inactive! Cannot record visit.', true); return; }
-  m.visits++; updateStats(); selectMember(id);
-  showToast('Visit recorded for '+m.name+'! Total: '+m.visits);
+  if(!m.isActive){ showToast('Membership inactive! Visit record hoot nahi.', true); return; }
+  m.visits++; saveToStorage(); updateStats(); selectMember(id);
+  showToast('Visit recorded! '+m.name+' - Total: '+m.visits);
 }
 
 function deactivateMember(id){
   var m = members.find(function(x){return x.id===id;});
   if(!m) return;
-  m.isActive = false; updateStats(); selectMember(id);
+  m.isActive = false; saveToStorage(); updateStats(); selectMember(id);
   showToast(m.name+' deactivated.');
 }
 
 function checkExpired(){
   var now = new Date(); var count = 0;
-  members.forEach(function(m){ if(now > m.expiry && m.isActive){ m.isActive = false; count++; } });
-  updateStats();
+  members.forEach(function(m){ if(now>m.expiry && m.isActive){ m.isActive=false; count++; } });
+  saveToStorage(); updateStats();
   if(selectedId) selectMember(selectedId);
   filterMembers(document.getElementById('search-input').value);
-  showToast(count>0 ? count+' member(s) deactivated due to expiry.' : 'All memberships up to date!');
+  showToast(count>0 ? count+' member(s) deactivated due to expiry.' : 'Sagle memberships up to date!');
 }
 
 function openModal(action, memberId){
@@ -337,19 +440,19 @@ function openModal(action, memberId){
   var titleEl = document.getElementById('modal-title-text');
   var bodyEl = document.getElementById('modal-body');
   var saveBtn = document.getElementById('modal-save-btn');
-  if(action === 'register'){
+  if(action==='register'){
     titleEl.textContent = 'Register New Member';
     saveBtn.textContent = 'Register Member';
-    bodyEl.innerHTML = '<div class="form-row"><div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="inp-id" placeholder="e.g. 101"></div><div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="inp-age" placeholder="Min. 16"></div></div><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="inp-name" placeholder="Member\'s full name"></div><div class="form-group"><label class="form-label">Membership Plan</label><select class="form-select" id="inp-plan"><option value="">Select plan...</option><option value="Basic">Basic – Rs.999/month</option><option value="Premium">Premium – Rs.1,799/month</option><option value="Elite">Elite – Rs.2,999/month</option></select></div>';
-  } else if(action === 'renew'){
+    bodyEl.innerHTML = '<div class="form-row"><div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="inp-id" placeholder="e.g. 101"></div><div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="inp-age" placeholder="Min. 16"></div></div><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="inp-name" placeholder="Member\'s full name"></div><div class="form-group"><label class="form-label">Membership Plan</label><select class="form-select" id="inp-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
+  } else if(action==='renew'){
     var m = members.find(function(x){return x.id===memberId;});
     titleEl.textContent = 'Renew Membership';
     saveBtn.textContent = 'Renew +30 Days';
-    bodyEl.innerHTML = '<div class="info-box"><div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div><div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan+' Plan':'')+' &middot; Expiry: '+(m?fmtDate(m.expiry):'')+'</div></div><div style="color:#888;font-size:13px;">Renewing will extend membership by 30 days and reactivate the member.</div>';
-  } else if(action === 'upgrade'){
+    bodyEl.innerHTML = '<div class="info-box"><div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div><div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan+' Plan':'')+' &middot; Current Expiry: '+(m?fmtDate(m.expiry):'')+'</div></div><div style="color:#888;font-size:13px;">Renewing will extend membership by 30 days and reactivate the member.</div>';
+  } else if(action==='upgrade'){
     titleEl.textContent = 'Upgrade Plan';
     saveBtn.textContent = 'Update Plan';
-    bodyEl.innerHTML = '<div class="form-group"><label class="form-label">New Membership Plan</label><select class="form-select" id="inp-upgrade-plan"><option value="">Select plan...</option><option value="Basic">Basic – Rs.999/month</option><option value="Premium">Premium – Rs.1,799/month</option><option value="Elite">Elite – Rs.2,999/month</option></select></div>';
+    bodyEl.innerHTML = '<div class="form-group"><label class="form-label">New Membership Plan</label><select class="form-select" id="inp-upgrade-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
   }
   document.getElementById('modal').classList.add('show');
 }
@@ -357,7 +460,7 @@ function openModal(action, memberId){
 function closeModal(){ document.getElementById('modal').classList.remove('show'); }
 
 function handleModalSave(){
-  if(currentAction === 'register'){
+  if(currentAction==='register'){
     var id = parseInt(document.getElementById('inp-id').value);
     var age = parseInt(document.getElementById('inp-age').value);
     var name = document.getElementById('inp-name').value.trim();
@@ -370,16 +473,16 @@ function handleModalSave(){
     var now = new Date();
     var exp = new Date(now); exp.setDate(exp.getDate()+30);
     members.push({id:id,name:name,age:age,plan:plan,joinDate:now,expiry:exp,visits:0,isActive:true});
-    updateStats(); filterMembers(''); closeModal();
-    showToast(name+' registered successfully!');
-  } else if(currentAction === 'renew'){
+    saveToStorage(); updateStats(); filterMembers(''); closeModal();
+    showToast(name+' registered successfully! Data saved!');
+  } else if(currentAction==='renew'){
     var m = members.find(function(x){return x.id===actionMemberId;});
-    if(m){ m.expiry.setDate(m.expiry.getDate()+30); m.isActive=true; updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); showToast('Membership renewed for '+m.name+'!'); }
-  } else if(currentAction === 'upgrade'){
+    if(m){ m.expiry.setDate(m.expiry.getDate()+30); m.isActive=true; saveToStorage(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); showToast('Membership renewed! Data saved!'); }
+  } else if(currentAction==='upgrade'){
     var np = document.getElementById('inp-upgrade-plan').value;
     if(!np){ showToast('Plan select karo!', true); return; }
     var m = members.find(function(x){return x.id===actionMemberId;});
-    if(m){ m.plan=np; updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); showToast('Plan upgraded to '+np+'!'); }
+    if(m){ m.plan=np; saveToStorage(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); showToast('Plan upgraded to '+np+'! Data saved!'); }
   }
 }
 
@@ -389,7 +492,13 @@ function setActiveNav(el){
 }
 
 document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this)closeModal(); });
-updateStats(); renderList([]);
+
+// ===== INIT: Load data on page open =====
+loadFromStorage();
+updateLastSavedLabel();
+updateStats();
+filterMembers('');
+if(members.length > 0) showToast(members.length + ' members loaded from saved data!');
 </script>
 </body>
 </html>
