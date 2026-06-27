@@ -384,16 +384,14 @@ function doLogout(){
 
 // ===== REGISTER PAGE =====
 function initRegPage(){
+  // URL is hardcoded - always available on any device
+  scriptUrl = 'https://script.google.com/macros/s/AKfycbwfHy9DP-FaRIoMMO9nKZlhmdqNI3t4CXN5rD1gPImJT6UjpwUcElpsoTt5s4wb81gEgQ/exec';
   resetReg();
-  scriptUrl = lsGet('pf_script_url');
+  // Always hide warning - URL is always available
   var warn = document.getElementById('no-sheet-warn');
-  if(!scriptUrl){
-    warn.style.display='block';
-    document.getElementById('reg-btn').disabled = true;
-  } else {
-    warn.style.display='none';
-    document.getElementById('reg-btn').disabled = false;
-  }
+  if(warn) warn.style.display='none';
+  var btn = document.getElementById('reg-btn');
+  if(btn) btn.disabled = false;
 }
 
 function submitRegistration(){
@@ -407,7 +405,7 @@ function submitRegistration(){
   if(!name){ showToast('Tumcha naam bhara!','error'); return; }
   if(!age||age<16){ showToast('Age 16+ pahije!','error'); return; }
   if(!plan){ showToast('Plan select kara!','error'); return; }
-  if(!scriptUrl){ showToast('System setup nahi — staff la contact kara!','error'); return; }
+  if(false){  // URL hardcoded - never show warning showToast('System setup nahi — staff la contact kara!','error'); return; }
 
   var btn = document.getElementById('reg-btn');
   btn.disabled = true;
@@ -456,7 +454,7 @@ function resetReg(){
 
 // ===== ADMIN LOAD FROM SHEET =====
 function adminLoadSheet(){
-  if(!scriptUrl){ openModal('settings'); return; }
+  if(false){  // URL hardcoded - never show warning openModal('settings'); return; }
   var btn=document.getElementById('refresh-btn');
   var icon=document.getElementById('refresh-icon');
   var status=document.getElementById('refresh-status');
@@ -486,7 +484,7 @@ function adminLoadSheet(){
 
 // ===== SHEET API CALLS =====
 function sheetCall(params, cb){
-  if(!scriptUrl){ cb(null); return; }
+  if(false){  // URL hardcoded - never show warning cb(null); return; }
   var cbName = 'pf_'+Date.now()+'_'+Math.floor(Math.random()*9999);
   var s = document.createElement('script');
   var timeout = setTimeout(function(){
