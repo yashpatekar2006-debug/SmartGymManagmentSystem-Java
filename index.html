@@ -9,8 +9,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-height: 100vh; }
 
-/* ===== LOGIN PAGE ===== */
-.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+/* LOGIN */
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 .login-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 36px 32px; width: 360px; text-align: center; }
 .login-logo { width: 56px; height: 56px; background: #c8a84b; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
 .login-title { color: #fff; font-size: 20px; font-weight: bold; margin-bottom: 4px; }
@@ -23,11 +23,11 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .login-btn { width: 100%; background: #c8a84b; color: #000; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; margin-top: 4px; }
 .login-btn:hover { background: #e0b955; }
 .login-error { color: #f09595; font-size: 12px; margin-top: 8px; display: none; }
-.login-hint { color: #555; font-size: 11px; margin-top: 16px; }
+.login-hint { color: #555; font-size: 11px; margin-top: 14px; }
 
-/* ===== REGISTER ONLY PAGE ===== */
-.register-page { min-height: 100vh; background: #0a0a0a; display: flex; align-items: center; justify-content: center; padding: 24px; }
-.register-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; }
+/* REGISTER PAGE */
+.register-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.register-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 32px; width: 100%; max-width: 460px; }
 .register-header { text-align: center; margin-bottom: 28px; }
 .register-logo { width: 52px; height: 52px; background: #c8a84b; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
 .register-title { color: #fff; font-size: 20px; font-weight: bold; }
@@ -39,22 +39,23 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .form-select { width: 100%; background: #111; border: 1px solid #333; color: #ccc; padding: 11px 14px; border-radius: 8px; font-size: 14px; cursor: pointer; outline: none; }
 .form-select:focus { border-color: #c8a84b; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.submit-btn { width: 100%; background: #c8a84b; color: #000; border: none; padding: 13px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 8px; }
+.submit-btn { width: 100%; background: #c8a84b; color: #000; border: none; padding: 13px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
 .submit-btn:hover { background: #e0b955; }
-.submit-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
-.success-box { display: none; text-align: center; padding: 32px 0; }
+.submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+.no-sheet-warning { background: rgba(162,45,45,0.1); border: 1px solid rgba(162,45,45,0.3); border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; color: #f09595; font-size: 12px; display: none; }
+.success-box { display: none; text-align: center; padding: 20px 0; }
 .success-icon { width: 64px; height: 64px; background: rgba(99,153,34,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
 .success-title { color: #97c459; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
-.success-sub { color: #888; font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+.success-sub { color: #888; font-size: 13px; margin-bottom: 20px; line-height: 1.7; }
 .success-card { background: #111; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; text-align: left; margin-bottom: 20px; }
-.success-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1f1f1f; font-size: 13px; }
+.success-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #1f1f1f; font-size: 13px; }
 .success-row:last-child { border-bottom: none; }
-.success-lbl { color: #666; }
-.success-val { color: #ddd; font-weight: bold; }
-.reg-again-btn { background: #222; border: 1px solid #333; color: #aaa; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+.s-lbl { color: #666; }
+.s-val { color: #ddd; font-weight: bold; }
+.reg-again-btn { background: #222; border: 1px solid #333; color: #aaa; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 13px; margin: 0 4px; }
 .reg-again-btn:hover { background: #2a2a2a; color: #fff; }
 
-/* ===== ADMIN DASHBOARD ===== */
+/* ADMIN */
 .app { display: flex; min-height: 100vh; }
 .sidebar { width: 210px; background: #1a1a1a; border-right: 1px solid #2a2a2a; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 10; }
 .sidebar-logo { padding: 20px 16px 16px; border-bottom: 1px solid #2a2a2a; }
@@ -64,18 +65,17 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; color: #888; font-size: 13px; border-left: 3px solid transparent; transition: all 0.15s; }
 .nav-item:hover { color: #ddd; background: #222; }
 .nav-item.active { color: #c8a84b; background: rgba(200,168,75,0.08); border-left: 3px solid #c8a84b; }
-.nav-item i { font-size: 17px; }
 .nav-section { color: #555; font-size: 10px; padding: 10px 16px 4px; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid #2a2a2a; margin-top: 8px; }
 .main { margin-left: 210px; padding: 24px; flex: 1; }
-.top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 12px; }
 .page-title { color: #fff; font-size: 20px; font-weight: bold; }
 .page-sub { color: #666; font-size: 12px; margin-top: 3px; }
 .top-right { display: flex; align-items: center; gap: 10px; }
 .add-btn { background: #c8a84b; color: #000; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 .add-btn:hover { background: #e0b955; }
 .logout-btn { background: #222; border: 1px solid #333; color: #888; padding: 9px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-.logout-btn:hover { color: #f09595; border-color: rgba(162,45,45,0.4); }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.logout-btn:hover { color: #f09595; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 22px; }
 .stat-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 16px; }
 .stat-label { color: #666; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .stat-value { color: #fff; font-size: 26px; font-weight: bold; }
@@ -86,7 +86,7 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .badge-blue { background: rgba(24,95,165,0.15); color: #85b7eb; }
 .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; }
 .members-panel { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; overflow: hidden; }
-.panel-header { padding: 14px 16px; border-bottom: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; }
+.panel-header { padding: 14px 16px; border-bottom: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .panel-title { color: #ddd; font-size: 14px; font-weight: bold; }
 .search-box { background: #111; border: 1px solid #333; color: #ccc; padding: 7px 11px; border-radius: 7px; font-size: 12px; width: 180px; outline: none; }
 .search-box:focus { border-color: #c8a84b; }
@@ -98,10 +98,10 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .av-blue { background: rgba(55,138,221,0.2); color: #85b7eb; }
 .av-teal { background: rgba(29,158,117,0.15); color: #5dcaa5; }
 .av-pink { background: rgba(212,83,126,0.15); color: #ed93b1; }
-.member-info { flex: 1; }
-.member-name { color: #ddd; font-size: 13px; font-weight: bold; }
+.member-info { flex: 1; min-width: 0; }
+.member-name { color: #ddd; font-size: 13px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .member-plan-text { color: #666; font-size: 11px; margin-top: 2px; }
-.member-status { font-size: 11px; padding: 3px 9px; border-radius: 20px; }
+.member-status { font-size: 11px; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; }
 .status-active { background: rgba(99,153,34,0.15); color: #97c459; }
 .status-inactive { background: rgba(162,45,45,0.15); color: #f09595; }
 .right-panel { display: flex; flex-direction: column; gap: 14px; }
@@ -121,132 +121,112 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 .action-btn.danger { color: #f09595; border-color: rgba(162,45,45,0.3); }
 .bar-track { background: #222; border-radius: 20px; height: 6px; margin-top: 6px; }
 .bar-fill { background: #c8a84b; height: 6px; border-radius: 20px; }
-.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 100; }
+.empty-state { padding: 40px; text-align: center; color: #444; font-size: 13px; }
+.empty-state i { font-size: 36px; display: block; margin-bottom: 10px; }
+.visit-big { color: #c8a84b; font-size: 24px; font-weight: bold; }
+.info-box { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px; margin-bottom: 13px; }
+.modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 100; }
 .modal-overlay.show { display: flex; }
 .modal { background: #1c1c1c; border: 1px solid #333; border-radius: 12px; padding: 22px; width: 420px; max-height: 90vh; overflow-y: auto; }
 .modal-title { color: #fff; font-size: 16px; font-weight: bold; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
 .modal-close { background: none; border: none; color: #666; cursor: pointer; font-size: 20px; }
 .modal-close:hover { color: #fff; }
 .modal-footer { display: flex; gap: 10px; margin-top: 18px; }
-.btn-cancel { flex: 1; background: #222; border: 1px solid #333; color: #888; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; }
-.btn-save { flex: 2; background: #c8a84b; border: none; color: #000; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; }
-.btn-save:hover { background: #e0b955; }
-.info-box { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px; margin-bottom: 13px; }
-.visit-big { color: #c8a84b; font-size: 24px; font-weight: bold; }
-.empty-state { padding: 40px; text-align: center; color: #444; font-size: 13px; }
-.empty-state i { font-size: 36px; display: block; margin-bottom: 10px; }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; margin-right: 6px; }
-.setup-banner { background: linear-gradient(135deg,rgba(200,168,75,0.12),rgba(200,168,75,0.04)); border: 1px solid rgba(200,168,75,0.3); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-.sync-btn { background: #c8a84b; color: #000; border: none; padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: bold; cursor: pointer; white-space: nowrap; }
-.admin-badge { background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.3); color: #c8a84b; font-size: 11px; padding: 3px 10px; border-radius: 20px; }
-.toast { position: fixed; bottom: 24px; right: 24px; background: #1f2b1f; border: 1px solid #3a5a3a; color: #97c459; padding: 12px 18px; border-radius: 10px; font-size: 13px; display: none; z-index: 200; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); max-width: 320px; }
-.toast.show { display: flex; }
-.toast.error { background: #2b1f1f; border-color: #5a3a3a; color: #f09595; }
-.toast.info { background: #1f222b; border-color: #3a4a5a; color: #85b7eb; }
+.btn-cancel { flex:1; background:#222; border:1px solid #333; color:#888; padding:10px; border-radius:8px; cursor:pointer; font-size:13px; }
+.btn-save { flex:2; background:#c8a84b; border:none; color:#000; padding:10px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:bold; }
+.btn-save:hover { background:#e0b955; }
+.sheet-banner { background: linear-gradient(135deg,rgba(200,168,75,0.12),rgba(200,168,75,0.04)); border:1px solid rgba(200,168,75,0.3); border-radius:10px; padding:14px 18px; margin-bottom:20px; display:flex; align-items:center; gap:14px; }
+.sync-chip { background:#c8a84b; color:#000; border:none; padding:7px 14px; border-radius:7px; font-size:12px; font-weight:bold; cursor:pointer; white-space:nowrap; }
+.sync-chip:hover { background:#e0b955; }
+.status-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; }
+.admin-badge { background:rgba(200,168,75,0.15); border:1px solid rgba(200,168,75,0.3); color:#c8a84b; font-size:11px; padding:3px 10px; border-radius:20px; margin-left:8px; }
+.refresh-bar { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:8px; padding:10px 14px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; }
+.auto-refresh-lbl { color:#666; font-size:12px; }
+.refresh-btn { background:#222; border:1px solid #333; color:#85b7eb; padding:6px 14px; border-radius:6px; font-size:12px; cursor:pointer; display:flex; align-items:center; gap:6px; }
+.refresh-btn:hover { background:#2a2a2a; }
+.toast { position:fixed; bottom:24px; right:24px; background:#1f2b1f; border:1px solid #3a5a3a; color:#97c459; padding:12px 18px; border-radius:10px; font-size:13px; display:none; z-index:200; align-items:center; gap:10px; box-shadow:0 4px 20px rgba(0,0,0,0.5); max-width:320px; }
+.toast.show { display:flex; }
+.toast.error { background:#2b1f1f; border-color:#5a3a3a; color:#f09595; }
+.toast.info { background:#1f222b; border-color:#3a4a5a; color:#85b7eb; }
+.spinning { display:inline-block; animation:spin 1s linear infinite; }
+@keyframes spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 </style>
 </head>
 <body>
 
-<!-- ===== LOGIN PAGE ===== -->
-<div id="page-login" class="login-page">
+<!-- LOGIN -->
+<div id="page-login" class="login-page" style="display:none;">
   <div class="login-box">
     <div class="login-logo"><i class="ti ti-barbell" style="color:#000;font-size:26px;"></i></div>
     <div class="login-title">Perfect Fitness</div>
     <div class="login-sub">Gym Management System</div>
-
     <div class="login-tabs">
-      <button class="login-tab active" onclick="switchLoginTab('admin',this)">
-        <i class="ti ti-shield-lock" style="font-size:13px;"></i> Admin Login
-      </button>
-      <button class="login-tab" onclick="switchLoginTab('member',this)">
-        <i class="ti ti-user-plus" style="font-size:13px;"></i> Register
-      </button>
+      <button class="login-tab active" onclick="switchTab('admin',this)"><i class="ti ti-shield-lock" style="font-size:13px;"></i> Admin</button>
+      <button class="login-tab" onclick="switchTab('member',this)"><i class="ti ti-user-plus" style="font-size:13px;"></i> Register</button>
     </div>
-
-    <div id="admin-login-form">
-      <input class="login-input" type="password" id="admin-pass" placeholder="Enter admin password..." onkeydown="if(event.key==='Enter')doAdminLogin()">
-      <button class="login-btn" onclick="doAdminLogin()">
-        <i class="ti ti-login" style="font-size:15px;"></i> Login as Admin
-      </button>
-      <div class="login-error" id="login-error">❌ Wrong password! Try again.</div>
-      <div class="login-hint">Admin only — for gym staff use</div>
+    <div id="admin-tab">
+      <input class="login-input" type="password" id="admin-pass" placeholder="Admin password...">
+      <button class="login-btn" onclick="doAdminLogin()"><i class="ti ti-login" style="font-size:15px;"></i> Login as Admin</button>
+      <div class="login-error" id="login-error">❌ Wrong password!</div>
+      <div class="login-hint">Admin only — gym staff use</div>
     </div>
-
-    <div id="member-login-form" style="display:none;">
-      <button class="login-btn" onclick="showPage('register')">
-        <i class="ti ti-user-plus" style="font-size:15px;"></i> Register as New Member
-      </button>
-      <div class="login-hint">Fill your details and join Perfect Fitness!</div>
+    <div id="member-tab" style="display:none;">
+      <button class="login-btn" onclick="showPage('register')"><i class="ti ti-user-plus" style="font-size:15px;"></i> Register as New Member</button>
+      <div class="login-hint">Perfect Fitness madhe join karo!</div>
     </div>
   </div>
 </div>
 
-<!-- ===== MEMBER REGISTRATION PAGE ===== -->
+<!-- REGISTER PAGE -->
 <div id="page-register" class="register-page" style="display:none;">
   <div class="register-box">
     <div class="register-header">
       <div class="register-logo"><i class="ti ti-barbell" style="color:#000;font-size:22px;"></i></div>
       <div class="register-title">Join Perfect Fitness! 💪</div>
-      <div class="register-sub">Fill your details below to register your membership</div>
+      <div class="register-sub">Tuzhi details bhara aani membership ghya</div>
     </div>
-
+    <div class="no-sheet-warning" id="no-sheet-warn">
+      ⚠️ Gym system abhi setup ho raha hai. Thodi der baad try karo ya gym staff la contact karo.
+    </div>
     <div id="reg-form">
       <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Member ID</label>
-          <input class="form-input" type="number" id="reg-id" placeholder="e.g. 101">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Age</label>
-          <input class="form-input" type="number" id="reg-age" placeholder="Min. 16">
-        </div>
+        <div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="reg-id" placeholder="e.g. 101"></div>
+        <div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="reg-age" placeholder="Min. 16"></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-        <input class="form-input" id="reg-name" placeholder="Your full name">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Phone Number</label>
-        <input class="form-input" id="reg-phone" placeholder="Your mobile number">
-      </div>
+      <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="reg-name" placeholder="Tumcha purn naam"></div>
+      <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" id="reg-phone" placeholder="Mobile number" type="tel"></div>
       <div class="form-group">
         <label class="form-label">Membership Plan</label>
         <select class="form-select" id="reg-plan">
-          <option value="">Select your plan...</option>
+          <option value="">Plan select kara...</option>
           <option value="Basic">🥉 Basic – Rs.999/month</option>
           <option value="Premium">🥈 Premium – Rs.1,799/month</option>
           <option value="Elite">🥇 Elite – Rs.2,999/month</option>
         </select>
       </div>
-      <button class="submit-btn" id="reg-submit-btn" onclick="submitRegistration()">
+      <button class="submit-btn" id="reg-btn" onclick="submitRegistration()">
         <i class="ti ti-user-check" style="font-size:16px;"></i> Register Now
       </button>
       <div style="text-align:center;margin-top:14px;">
         <span style="color:#555;font-size:12px;cursor:pointer;" onclick="showPage('login')">
-          <i class="ti ti-arrow-left" style="font-size:12px;"></i> Back to Login
+          <i class="ti ti-arrow-left" style="font-size:12px;"></i> Back
         </span>
       </div>
     </div>
-
-    <!-- Success Message -->
     <div class="success-box" id="reg-success">
       <div class="success-icon"><i class="ti ti-circle-check" style="font-size:32px;color:#97c459;"></i></div>
       <div class="success-title">Registration Successful! 🎉</div>
-      <div class="success-sub">Welcome to <b style="color:#c8a84b;">Perfect Fitness</b>!<br>Tuzhi membership activate zali aahe. Gym enjoy kar! 💪</div>
-      <div class="success-card" id="reg-details-card"></div>
-      <div style="display:flex;gap:10px;justify-content:center;">
-        <button class="reg-again-btn" onclick="resetRegForm()">
-          <i class="ti ti-plus" style="font-size:13px;"></i> Register Another
-        </button>
-        <button class="reg-again-btn" onclick="showPage('login')" style="color:#c8a84b;border-color:rgba(200,168,75,0.3);">
-          <i class="ti ti-home" style="font-size:13px;"></i> Back to Home
-        </button>
+      <div class="success-sub">Welcome to <b style="color:#c8a84b;">Perfect Fitness</b>!<br>Tumchi membership activate zali aahe. Gym enjoy kara! 💪</div>
+      <div class="success-card" id="reg-details"></div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="reg-again-btn" onclick="resetReg()"><i class="ti ti-plus" style="font-size:13px;"></i> Register Another</button>
+        <button class="reg-again-btn" onclick="showPage('login')" style="color:#c8a84b;border-color:rgba(200,168,75,0.3);"><i class="ti ti-home" style="font-size:13px;"></i> Home</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== ADMIN DASHBOARD ===== -->
+<!-- ADMIN DASHBOARD -->
 <div id="page-admin" style="display:none;">
   <div class="app">
     <div class="sidebar">
@@ -256,69 +236,61 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
         <div class="gym-sub">Admin Dashboard</div>
       </div>
       <div style="margin-top:8px;">
-        <div class="nav-item active" onclick="setActiveNav(this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
-        <div class="nav-item" onclick="setActiveNav(this)"><i class="ti ti-users"></i> Members</div>
+        <div class="nav-item active" onclick="setNav(this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+        <div class="nav-item" onclick="setNav(this)"><i class="ti ti-users"></i> Members</div>
         <div class="nav-section">Actions</div>
-        <div class="nav-item" onclick="openModal('register')"><i class="ti ti-user-plus"></i> Add Member</div>
+        <div class="nav-item" onclick="openModal('add')"><i class="ti ti-user-plus"></i> Add Member</div>
         <div class="nav-item" onclick="checkExpired()"><i class="ti ti-bell-ringing"></i> Check Expired</div>
-        <div class="nav-item" onclick="syncNow()"><i class="ti ti-cloud-upload"></i> Sync to Sheet</div>
-        <div class="nav-item" onclick="loadFromSheet()" style="color:#85b7eb;"><i class="ti ti-cloud-download"></i> Load from Sheet</div>
-        <div class="nav-section">Data</div>
-        <div class="nav-item" onclick="exportData()"><i class="ti ti-download"></i> Export Backup</div>
-        <div class="nav-item" onclick="document.getElementById('import-file').click()"><i class="ti ti-upload"></i> Import Backup</div>
-        <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importData(event)">
+        <div class="nav-section">Sheet</div>
+        <div class="nav-item" onclick="adminLoadSheet()" style="color:#85b7eb;"><i class="ti ti-cloud-download"></i> Refresh from Sheet</div>
         <div class="nav-item" onclick="openModal('settings')" style="color:#85b7eb;"><i class="ti ti-settings"></i> Sheet Settings</div>
+        <div class="nav-section">Backup</div>
+        <div class="nav-item" onclick="exportData()"><i class="ti ti-download"></i> Export JSON</div>
+        <div class="nav-item" onclick="document.getElementById('imp-file').click()"><i class="ti ti-upload"></i> Import JSON</div>
+        <input type="file" id="imp-file" accept=".json" style="display:none;" onchange="importData(event)">
       </div>
       <div style="position:absolute;bottom:16px;left:0;right:0;padding:0 12px;">
         <div style="background:rgba(200,168,75,0.08);border:1px solid rgba(200,168,75,0.2);border-radius:8px;padding:10px 12px;">
-          <div style="color:#c8a84b;font-size:11px;font-weight:bold;margin-bottom:4px;">Sync Status</div>
-          <div style="font-size:11px;" id="sync-status-lbl"><span class="status-dot" id="sync-dot"></span><span style="color:#666;">Not configured</span></div>
-          <div style="color:#555;font-size:10px;margin-top:4px;" id="last-sync-lbl"></div>
+          <div style="font-size:11px;" id="sheet-status-lbl"><span class="status-dot" id="sheet-dot" style="background:#555;"></span><span style="color:#666;">Not connected</span></div>
+          <div style="color:#555;font-size:10px;margin-top:4px;" id="last-refresh-lbl"></div>
+          <button class="logout-btn" onclick="doLogout()" style="margin-top:8px;width:100%;justify-content:center;font-size:12px;"><i class="ti ti-logout" style="font-size:13px;"></i> Logout</button>
         </div>
       </div>
     </div>
 
     <div class="main">
-      <div class="setup-banner" id="setup-banner">
+      <!-- Sheet not configured banner -->
+      <div class="sheet-banner" id="sheet-banner">
         <div style="flex:1;">
-          <div style="color:#c8a84b;font-size:13px;font-weight:bold;margin-bottom:4px;">Google Sheets Connect karo</div>
-          <div style="color:#888;font-size:12px;">Apps Script URL paste karo — data saglyancha disel!</div>
+          <div style="color:#c8a84b;font-size:13px;font-weight:bold;margin-bottom:4px;">⚠️ Google Sheets connect nahi!</div>
+          <div style="color:#888;font-size:12px;">URL set karo — members saglyancha disel, register kela ki lagnech Sheet var jato!</div>
         </div>
-        <button class="sync-btn" onclick="openModal('settings')">Setup karo</button>
+        <button class="sync-chip" onclick="openModal('settings')">Setup karo</button>
       </div>
 
       <div class="top-bar">
         <div>
           <div class="page-title">Dashboard <span class="admin-badge">Admin</span></div>
-          <div class="page-sub" id="connection-sub">Perfect Fitness — Google Sheets la connect karo</div>
+          <div class="page-sub" id="sheet-url-sub">Sheet: Not connected</div>
         </div>
         <div class="top-right">
-          <button class="add-btn" onclick="openModal('register')"><i class="ti ti-plus" style="font-size:14px;"></i> Add Member</button>
-          <button class="logout-btn" onclick="doLogout()"><i class="ti ti-logout" style="font-size:14px;"></i> Logout</button>
+          <button class="add-btn" onclick="openModal('add')"><i class="ti ti-plus"></i> Add Member</button>
         </div>
       </div>
 
+      <!-- Refresh bar -->
+      <div class="refresh-bar">
+        <span class="auto-refresh-lbl" id="refresh-status">Last refresh: Never &nbsp;|&nbsp; Members dikhne ke liye Sheet se load karo</span>
+        <button class="refresh-btn" onclick="adminLoadSheet()" id="refresh-btn">
+          <i class="ti ti-refresh" style="font-size:14px;" id="refresh-icon"></i> Refresh from Sheet
+        </button>
+      </div>
+
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Total Members</div>
-          <div class="stat-value" id="stat-total">0</div>
-          <span class="stat-badge badge-blue">Registered</span>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Active</div>
-          <div class="stat-value" id="stat-active">0</div>
-          <span class="stat-badge badge-green">Valid</span>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Inactive</div>
-          <div class="stat-value" id="stat-inactive">0</div>
-          <span class="stat-badge badge-red">Expired</span>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Visits</div>
-          <div class="stat-value" id="stat-visits">0</div>
-          <span class="stat-badge badge-amber">All time</span>
-        </div>
+        <div class="stat-card"><div class="stat-label">Total Members</div><div class="stat-value" id="stat-total">0</div><span class="stat-badge badge-blue">Registered</span></div>
+        <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value" id="stat-active">0</div><span class="stat-badge badge-green">Valid</span></div>
+        <div class="stat-card"><div class="stat-label">Inactive</div><div class="stat-value" id="stat-inactive">0</div><span class="stat-badge badge-red">Expired</span></div>
+        <div class="stat-card"><div class="stat-label">Total Visits</div><div class="stat-value" id="stat-visits">0</div><span class="stat-badge badge-amber">All time</span></div>
       </div>
 
       <div class="content-grid">
@@ -327,17 +299,13 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
             <div class="panel-title">All Members</div>
             <input class="search-box" placeholder="Search name or ID..." oninput="filterMembers(this.value)" id="search-input">
           </div>
-          <div id="members-list">
-            <div class="empty-state"><i class="ti ti-user-off"></i>No members yet!</div>
-          </div>
+          <div id="members-list"><div class="empty-state"><i class="ti ti-cloud-download"></i>"Refresh from Sheet" click karo members load karnyasathi</div></div>
         </div>
         <div class="right-panel">
-          <div class="detail-card" id="detail-panel">
-            <div class="empty-state" style="padding:28px 0;"><i class="ti ti-id-badge"></i>Select a member</div>
-          </div>
+          <div class="detail-card" id="detail-panel"><div class="empty-state" style="padding:28px 0;"><i class="ti ti-id-badge"></i>Member select karo</div></div>
           <div class="detail-card">
             <div style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Plan Distribution</div>
-            <div id="plan-chart"><div style="color:#444;font-size:12px;">No data yet</div></div>
+            <div id="plan-chart"><div style="color:#444;font-size:12px;">No data</div></div>
           </div>
         </div>
       </div>
@@ -348,79 +316,86 @@ body { font-family: Arial, sans-serif; background: #0a0a0a; color: #ccc; min-hei
 <!-- Modal -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
-    <div class="modal-title">
-      <span id="modal-title-text"></span>
-      <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
-    </div>
+    <div class="modal-title"><span id="modal-title-text"></span><button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button></div>
     <div id="modal-body"></div>
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" onclick="handleModalSave()" id="modal-save-btn">Save</button>
+      <button class="btn-save" onclick="handleSave()" id="modal-save-btn">Save</button>
     </div>
   </div>
 </div>
 
 <!-- Toast -->
-<div id="toast" class="toast">
-  <i class="ti ti-circle-check" style="font-size:16px;" id="toast-icon"></i>
-  <span id="toast-msg"></span>
-</div>
+<div id="toast" class="toast"><i class="ti ti-circle-check" style="font-size:16px;" id="toast-icon"></i><span id="toast-msg"></span></div>
 
 <script>
-// ===== GLOBALS =====
+// ===== CONFIG =====
 var ADMIN_PASS = 'yash2006';
 var members = [];
 var selectedId = null;
 var currentAction = '';
-var actionMemberId = null;
+var actionId = null;
 var avColors = ['av-gold','av-blue','av-teal','av-pink'];
 var scriptUrl = '';
 var toastTimer = null;
 
-function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsGet(k){ try{ return localStorage.getItem(k)||''; }catch(e){ return ''; } }
 function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
-// ===== PAGE ROUTING =====
-function showPage(page){
-  document.getElementById('page-login').style.display = 'none';
-  document.getElementById('page-register').style.display = 'none';
-  document.getElementById('page-admin').style.display = 'none';
-  if(page === 'login') document.getElementById('page-login').style.display = 'flex';
-  else if(page === 'register'){ document.getElementById('page-register').style.display = 'flex'; resetRegForm(); }
-  else if(page === 'admin') document.getElementById('page-admin').style.display = 'block';
+// ===== PAGES =====
+function showPage(p){
+  ['login','register','admin'].forEach(function(x){ document.getElementById('page-'+x).style.display='none'; });
+  if(p==='login') document.getElementById('page-login').style.display='flex';
+  else if(p==='register'){ document.getElementById('page-register').style.display='flex'; initRegPage(); }
+  else if(p==='admin') document.getElementById('page-admin').style.display='block';
 }
 
-function switchLoginTab(tab, el){
+function switchTab(tab, el){
   document.querySelectorAll('.login-tab').forEach(function(t){ t.classList.remove('active'); });
   el.classList.add('active');
-  document.getElementById('admin-login-form').style.display = tab==='admin' ? 'block' : 'none';
-  document.getElementById('member-login-form').style.display = tab==='member' ? 'block' : 'none';
+  document.getElementById('admin-tab').style.display = tab==='admin'?'block':'none';
+  document.getElementById('member-tab').style.display = tab==='member'?'block':'none';
 }
 
-// ===== ADMIN AUTH =====
+// ===== AUTH =====
 function doAdminLogin(){
   var pass = document.getElementById('admin-pass').value;
-  var errEl = document.getElementById('login-error');
+  var err = document.getElementById('login-error');
   if(pass === ADMIN_PASS){
-    errEl.style.display = 'none';
-    lsSet('pf_admin_session','1');
+    err.style.display='none';
+    lsSet('pf_session','1');
     showPage('admin');
-    loadLocal(); initScriptUrl(); updateStats(); filterMembers('');
-    if(members.length > 0) showToast(members.length+' members loaded!');
+    scriptUrl = lsGet('pf_script_url');
+    updateSheetStatus();
+    // Auto load from sheet on admin login
+    if(scriptUrl) adminLoadSheet();
   } else {
-    errEl.style.display = 'block';
-    document.getElementById('admin-pass').value = '';
-    document.getElementById('admin-pass').focus();
+    err.style.display='block';
+    document.getElementById('admin-pass').value='';
   }
 }
 
 function doLogout(){
-  lsSet('pf_admin_session','');
+  lsSet('pf_session','');
+  members=[];
   showPage('login');
-  document.getElementById('admin-pass').value = '';
+  document.getElementById('admin-pass').value='';
 }
 
-// ===== MEMBER REGISTRATION (public) =====
+// ===== REGISTER PAGE =====
+function initRegPage(){
+  resetReg();
+  scriptUrl = lsGet('pf_script_url');
+  var warn = document.getElementById('no-sheet-warn');
+  if(!scriptUrl){
+    warn.style.display='block';
+    document.getElementById('reg-btn').disabled = true;
+  } else {
+    warn.style.display='none';
+    document.getElementById('reg-btn').disabled = false;
+  }
+}
+
 function submitRegistration(){
   var id = parseInt(document.getElementById('reg-id').value);
   var age = parseInt(document.getElementById('reg-age').value);
@@ -428,177 +403,162 @@ function submitRegistration(){
   var phone = document.getElementById('reg-phone').value.trim();
   var plan = document.getElementById('reg-plan').value;
 
-  if(!id||id<=0){ showToast('Valid Member ID enter karo!','error'); return; }
-  if(members.find(function(m){ return m.id===id; })){ showToast('He ID aadheech registered aahe!','error'); return; }
-  if(!name){ showToast('Tumcha naam enter karo!','error'); return; }
-  if(!age||age<16){ showToast('Age 16 varshanpeksha kami nako!','error'); return; }
-  if(!plan){ showToast('Membership plan select karo!','error'); return; }
+  if(!id||id<=0){ showToast('Valid Member ID bhara!','error'); return; }
+  if(!name){ showToast('Tumcha naam bhara!','error'); return; }
+  if(!age||age<16){ showToast('Age 16+ pahije!','error'); return; }
+  if(!plan){ showToast('Plan select kara!','error'); return; }
+  if(!scriptUrl){ showToast('System setup nahi — staff la contact kara!','error'); return; }
 
-  var btn = document.getElementById('reg-submit-btn');
+  var btn = document.getElementById('reg-btn');
   btn.disabled = true;
-  btn.textContent = 'Registering...';
+  btn.innerHTML = '<i class="ti ti-loader spinning" style="font-size:16px;"></i> Registering...';
 
   var now = new Date();
   var exp = new Date(now); exp.setDate(exp.getDate()+30);
-  var newMember = {id:id, name:name, age:age, plan:plan, phone:phone, joinDate:now, expiry:exp, visits:0, isActive:true};
-  members.push(newMember);
-  saveLocal();
+  var m = {
+    id: id, name: name, age: age, plan: plan, phone: phone,
+    joinDate: now.toISOString(), expiry: exp.toISOString(),
+    visits: 0, isActive: true
+  };
 
-  // Show success
-  document.getElementById('reg-details-card').innerHTML =
-    '<div class="success-row"><span class="success-lbl">Member ID</span><span class="success-val">#'+id+'</span></div>'
-    +'<div class="success-row"><span class="success-lbl">Name</span><span class="success-val">'+name+'</span></div>'
-    +'<div class="success-row"><span class="success-lbl">Plan</span><span class="success-val">'+plan+'</span></div>'
-    +'<div class="success-row"><span class="success-lbl">Valid Till</span><span class="success-val" style="color:#97c459;">'+fmtDate(exp)+'</span></div>'
-    +'<div class="success-row"><span class="success-lbl">Status</span><span class="success-val" style="color:#97c459;">Active ✓</span></div>';
-
-  document.getElementById('reg-form').style.display = 'none';
-  document.getElementById('reg-success').style.display = 'block';
-
-  if(scriptUrl) syncNow();
-  btn.disabled = false;
-  btn.textContent = 'Register Now';
+  // Direct Sheet la save karo — localStorage bypass!
+  sheetAddMember(m, function(res){
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-user-check" style="font-size:16px;"></i> Register Now';
+    if(res && res.success){
+      // Show success
+      document.getElementById('reg-details').innerHTML =
+        '<div class="success-row"><span class="s-lbl">Member ID</span><span class="s-val">#'+id+'</span></div>'
+        +'<div class="success-row"><span class="s-lbl">Name</span><span class="s-val">'+name+'</span></div>'
+        +'<div class="success-row"><span class="s-lbl">Plan</span><span class="s-val">'+plan+'</span></div>'
+        +'<div class="success-row"><span class="s-lbl">Valid Till</span><span class="s-val" style="color:#97c459;">'+fmtDate(exp)+'</span></div>'
+        +'<div class="success-row"><span class="s-lbl">Status</span><span class="s-val" style="color:#97c459;">Active ✓</span></div>';
+      document.getElementById('reg-form').style.display='none';
+      document.getElementById('reg-success').style.display='block';
+    } else if(res && res.error){
+      showToast('Error: '+res.error,'error');
+    } else {
+      showToast('Registration failed! Internet check karo.','error');
+    }
+  });
 }
 
-function resetRegForm(){
-  document.getElementById('reg-id').value = '';
-  document.getElementById('reg-age').value = '';
-  document.getElementById('reg-name').value = '';
-  document.getElementById('reg-phone') && (document.getElementById('reg-phone').value = '');
-  document.getElementById('reg-plan').value = '';
-  document.getElementById('reg-form').style.display = 'block';
-  document.getElementById('reg-success').style.display = 'none';
+function resetReg(){
+  ['reg-id','reg-age','reg-name','reg-phone'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('reg-plan').value='';
+  document.getElementById('reg-form').style.display='block';
+  document.getElementById('reg-success').style.display='none';
+  var btn=document.getElementById('reg-btn');
+  if(btn){ btn.disabled=false; btn.innerHTML='<i class="ti ti-user-check" style="font-size:16px;"></i> Register Now'; }
 }
 
-// ===== TOAST =====
-function showToast(msg, type){
-  var t = document.getElementById('toast');
-  var msgEl = document.getElementById('toast-msg');
-  var iconEl = document.getElementById('toast-icon');
-  if(!t||!msgEl) return;
-  msgEl.textContent = msg;
-  if(iconEl) iconEl.className = 'ti '+(type==='error'?'ti-alert-circle':type==='info'?'ti-info-circle':'ti-circle-check');
-  t.className = 'toast show'+(type?' '+type:'');
-  if(toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ t.className='toast'; }, 3000);
+// ===== ADMIN LOAD FROM SHEET =====
+function adminLoadSheet(){
+  if(!scriptUrl){ openModal('settings'); return; }
+  var btn=document.getElementById('refresh-btn');
+  var icon=document.getElementById('refresh-icon');
+  var status=document.getElementById('refresh-status');
+  if(btn) btn.disabled=true;
+  if(icon) icon.className='ti ti-loader spinning';
+  if(status) status.textContent='Loading from Sheet...';
+  showToast('Sheet madhun data load hoto aahe...','info');
+
+  sheetGetAll(function(res){
+    if(btn) btn.disabled=false;
+    if(icon) icon.className='ti ti-refresh';
+    if(res && res.members){
+      members = res.members.map(parseMember);
+      updateStats(); filterMembers('');
+      var now=new Date();
+      lsSet('pf_last_refresh', now.toISOString());
+      if(status) status.textContent='Last refresh: '+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+' · '+members.length+' members';
+      setSheetStatus('connected');
+      showToast(members.length+' members loaded from Sheet!');
+    } else {
+      if(status) status.textContent='Load failed! URL check karo.';
+      showToast('Sheet load failed! URL check karo.','error');
+      setSheetStatus('error');
+    }
+  });
 }
 
-// ===== SYNC STATUS =====
-function setSyncStatus(status){
-  var dot = document.getElementById('sync-dot');
-  var lbl = document.getElementById('sync-status-lbl');
+// ===== SHEET API CALLS =====
+function sheetCall(params, cb){
+  if(!scriptUrl){ cb(null); return; }
+  var cbName = 'pf_'+Date.now()+'_'+Math.floor(Math.random()*9999);
+  var s = document.createElement('script');
+  var timeout = setTimeout(function(){
+    try{ delete window[cbName]; if(s.parentNode) s.parentNode.removeChild(s); }catch(e){}
+    cb(null);
+  }, 15000);
+  window[cbName] = function(res){
+    clearTimeout(timeout);
+    try{ delete window[cbName]; if(s.parentNode) s.parentNode.removeChild(s); }catch(e){}
+    cb(res);
+  };
+  s.onerror = function(){
+    clearTimeout(timeout);
+    try{ delete window[cbName]; if(s.parentNode) s.parentNode.removeChild(s); }catch(e){}
+    cb(null);
+  };
+  var url = scriptUrl + '?' + params + '&callback=' + cbName;
+  s.src = url;
+  document.body.appendChild(s);
+}
+
+function sheetGetAll(cb){
+  sheetCall('action=getAll', cb);
+}
+
+function sheetAddMember(m, cb){
+  sheetCall('action=addMember&data='+encodeURIComponent(JSON.stringify(m)), cb);
+}
+
+function sheetUpdateMember(m, cb){
+  sheetCall('action=updateMember&data='+encodeURIComponent(JSON.stringify(m)), cb);
+}
+
+function sheetSaveAll(arr, cb){
+  sheetCall('action=save&data='+encodeURIComponent(JSON.stringify(arr)), cb);
+}
+
+function parseMember(m){
+  return {
+    id: parseInt(m.id)||m.id, name: String(m.name||''), age: parseInt(m.age)||0,
+    plan: String(m.plan||'Basic'), phone: m.phone||'',
+    joinDate: new Date(m.joinDate), expiry: new Date(m.expiry),
+    visits: parseInt(m.visits)||0,
+    isActive: m.isActive===true||String(m.isActive).toUpperCase()==='TRUE'
+  };
+}
+
+// ===== SHEET STATUS =====
+function setSheetStatus(s){
+  var dot=document.getElementById('sheet-dot');
+  var lbl=document.getElementById('sheet-status-lbl');
   if(!dot||!lbl) return;
-  if(status==='connected'){
+  if(s==='connected'){
     dot.style.background='#97c459';
-    lbl.innerHTML='<span class="status-dot" style="background:#97c459;"></span><span style="color:#97c459;">Connected</span>';
-  } else if(status==='syncing'){
-    dot.style.background='#fac775';
-    lbl.innerHTML='<span class="status-dot" style="background:#fac775;"></span><span style="color:#fac775;">Syncing...</span>';
+    lbl.innerHTML='<span class="status-dot" style="background:#97c459;"></span><span style="color:#97c459;">Sheet Connected</span>';
+  } else if(s==='error'){
+    dot.style.background='#f09595';
+    lbl.innerHTML='<span class="status-dot" style="background:#f09595;"></span><span style="color:#f09595;">Connection Error</span>';
   } else {
     dot.style.background='#555';
-    lbl.innerHTML='<span class="status-dot"></span><span style="color:#666;">Not configured</span>';
+    lbl.innerHTML='<span class="status-dot" style="background:#555;"></span><span style="color:#666;">Not connected</span>';
   }
 }
 
-function initScriptUrl(){
-  scriptUrl = lsGet('pf_script_url')||'';
+function updateSheetStatus(){
   if(scriptUrl){
-    setSyncStatus('connected');
-    var b = document.getElementById('setup-banner'); if(b) b.style.display='none';
-    var s = document.getElementById('connection-sub'); if(s) s.textContent='Perfect Fitness — Google Sheets connected!';
+    setSheetStatus('connected');
+    var b=document.getElementById('sheet-banner'); if(b) b.style.display='none';
+    var sub=document.getElementById('sheet-url-sub'); if(sub) sub.textContent='Sheet: Connected ✓';
+  } else {
+    setSheetStatus('');
   }
-  var lastSync = lsGet('pf_last_sync');
-  if(lastSync){ var el=document.getElementById('last-sync-lbl'); if(el) el.textContent='Last: '+new Date(lastSync).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}); }
-}
-
-// ===== LOCAL STORAGE =====
-function saveLocal(){
-  var toSave = members.map(function(m){
-    return {id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',
-      joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),
-      visits:m.visits,isActive:m.isActive};
-  });
-  lsSet('pf_gym_v4',JSON.stringify(toSave));
-}
-
-function loadLocal(){
-  var raw = lsGet('pf_gym_v4');
-  if(!raw) return;
-  try {
-    members = JSON.parse(raw).map(function(m){
-      return {id:parseInt(m.id)||m.id,name:String(m.name),age:parseInt(m.age),
-        plan:String(m.plan),phone:m.phone||'',joinDate:new Date(m.joinDate),
-        expiry:new Date(m.expiry),visits:parseInt(m.visits)||0,
-        isActive:m.isActive===true||m.isActive==='true'||m.isActive==='TRUE'};
-    });
-  } catch(e){ members=[]; }
-}
-
-// ===== GOOGLE SHEETS =====
-function syncNow(){
-  if(!scriptUrl){ openModal('settings'); return; }
-  setSyncStatus('syncing');
-  var toSave = members.map(function(m){
-    return {id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',
-      joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),
-      visits:m.visits,isActive:m.isActive};
-  });
-  var cbName = 'pfcb_'+Date.now();
-  var s = document.createElement('script');
-  window[cbName] = function(res){
-    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
-    if(res&&res.success){
-      setSyncStatus('connected');
-      lsSet('pf_last_sync',new Date().toISOString());
-      var el=document.getElementById('last-sync-lbl'); if(el) el.textContent='Last: '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-      showToast('Synced! '+res.count+' members saved!');
-    } else { showToast('Sync failed.','error'); }
-  };
-  s.onerror = function(){ try{delete window[cbName];document.body.removeChild(s);}catch(e){} setSyncStatus(''); showToast('Sync error!','error'); };
-  s.src = scriptUrl+'?action=save&data='+encodeURIComponent(JSON.stringify(toSave))+'&callback='+cbName;
-  document.body.appendChild(s);
-}
-
-function loadFromSheet(){
-  if(!scriptUrl){ openModal('settings'); return; }
-  setSyncStatus('syncing'); showToast('Loading from Sheets...','info');
-  var cbName = 'pfload_'+Date.now();
-  var s = document.createElement('script');
-  window[cbName] = function(res){
-    try{ delete window[cbName]; document.body.removeChild(s); }catch(e){}
-    if(res&&res.members){
-      members = res.members.map(function(m){
-        return {id:parseInt(m.id)||m.id,name:String(m.name),age:parseInt(m.age),
-          plan:String(m.plan),phone:m.phone||'',joinDate:new Date(m.joinDate),
-          expiry:new Date(m.expiry),visits:parseInt(m.visits)||0,
-          isActive:m.isActive===true||m.isActive==='true'||m.isActive==='TRUE'};
-      });
-      saveLocal(); updateStats(); filterMembers('');
-      setSyncStatus('connected'); showToast(members.length+' members loaded!');
-    } else { showToast('Load failed!','error'); setSyncStatus(''); }
-  };
-  s.onerror = function(){ try{delete window[cbName];document.body.removeChild(s);}catch(e){} setSyncStatus(''); showToast('Connection error!','error'); };
-  s.src = scriptUrl+'?action=getAll&callback='+cbName;
-  document.body.appendChild(s);
-}
-
-// ===== EXPORT / IMPORT =====
-function exportData(){
-  var blob = new Blob([JSON.stringify({gym:'Perfect Fitness',members:members.map(function(m){return{id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:m.visits,isActive:m.isActive};}),exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
-  var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='gym_backup_'+new Date().toLocaleDateString('en-IN').replace(/\//g,'-')+'.json'; a.click();
-  showToast('Backup exported!');
-}
-function importData(event){
-  var file=event.target.files[0]; if(!file) return;
-  var reader=new FileReader();
-  reader.onload=function(e){
-    try{
-      var data=JSON.parse(e.target.result); var arr=data.members||data;
-      members=arr.map(function(m){return{id:parseInt(m.id)||m.id,name:String(m.name),age:parseInt(m.age),plan:String(m.plan),phone:m.phone||'',joinDate:new Date(m.joinDate),expiry:new Date(m.expiry),visits:parseInt(m.visits)||0,isActive:m.isActive===true||m.isActive==='true'||m.isActive==='TRUE'};});
-      saveLocal(); updateStats(); filterMembers(''); showToast(members.length+' members imported!');
-    }catch(err){ showToast('Invalid file!','error'); }
-  };
-  reader.readAsText(file); event.target.value='';
 }
 
 // ===== STATS =====
@@ -615,6 +575,7 @@ function updateStats(){
   var v=document.getElementById('stat-visits'); if(v) v.textContent=tv;
   updatePlanChart();
 }
+
 function updatePlanChart(){
   var plans={Basic:0,Premium:0,Elite:0};
   members.forEach(function(m){ if(plans[m.plan]!==undefined) plans[m.plan]++; });
@@ -623,33 +584,36 @@ function updatePlanChart(){
   var el=document.getElementById('plan-chart'); if(!el) return;
   el.innerHTML=Object.keys(plans).map(function(p){
     var pct=Math.round((plans[p]/total)*100);
-    return '<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="color:#aaa;font-size:12px;">'+p+'</span><span style="color:#666;font-size:12px;">'+plans[p]+' member'+(plans[p]!=1?'s':'')+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+colors[p]+';"></div></div></div>';
+    return '<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="color:#aaa;font-size:12px;">'+p+'</span><span style="color:#666;font-size:12px;">'+plans[p]+'</span></div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+colors[p]+';"></div></div></div>';
   }).join('');
 }
 
-// ===== MEMBER LIST =====
+// ===== LIST =====
 function renderList(list){
   var el=document.getElementById('members-list'); if(!el) return;
-  if(!list.length){ el.innerHTML='<div class="empty-state"><i class="ti ti-search"></i>No members found</div>'; return; }
+  if(!list.length){
+    el.innerHTML='<div class="empty-state"><i class="ti ti-search"></i>No members found</div>'; return;
+  }
   el.innerHTML=list.map(function(m){
     var idx=members.indexOf(m);
     return '<div class="member-row'+(m.id===selectedId?' selected':'')+'" onclick="selectMember('+m.id+')">'
       +'<div class="avatar '+getAv(idx)+'">'+getInitials(m.name)+'</div>'
       +'<div class="member-info"><div class="member-name">'+m.name+'</div>'
-      +'<div class="member-plan-text">ID #'+m.id+' · '+m.plan+' · '+m.visits+' visit'+(m.visits!=1?'s':'')+'</div></div>'
+      +'<div class="member-plan-text">ID #'+m.id+' · '+m.plan+' · '+m.visits+' visits</div></div>'
       +'<span class="member-status '+(m.isActive?'status-active':'status-inactive')+'">'+(m.isActive?'Active':'Expired')+'</span>'
       +'</div>';
   }).join('');
 }
+
 function filterMembers(q){
   q=(q||'').toLowerCase();
-  renderList(members.filter(function(m){ return m.name.toLowerCase().includes(q)||String(m.id).includes(q); }));
+  renderList(members.filter(function(m){ return (m.name||'').toLowerCase().includes(q)||String(m.id).includes(q); }));
 }
 
-// ===== MEMBER DETAIL =====
+// ===== DETAIL =====
 function selectMember(id){
   selectedId=id;
-  var m=members.find(function(x){ return x.id===id; }); if(!m) return;
+  var m=members.find(function(x){return x.id===id;}); if(!m) return;
   var idx=members.indexOf(m);
   var daysLeft=Math.max(0,Math.round((new Date(m.expiry)-new Date())/86400000));
   var el=document.getElementById('detail-panel'); if(!el) return;
@@ -661,7 +625,7 @@ function selectMember(id){
     +(m.phone?'<div class="detail-row"><span class="detail-lbl">Phone</span><span class="detail-val">'+m.phone+'</span></div>':'')
     +'<div class="detail-row"><span class="detail-lbl">Joined</span><span class="detail-val">'+fmtDate(m.joinDate)+'</span></div>'
     +'<div class="detail-row"><span class="detail-lbl">Expires</span><span class="detail-val" style="color:'+(daysLeft<7?'#f09595':'#97c459')+';">'+fmtDate(m.expiry)+'</span></div>'
-    +'<div class="detail-row"><span class="detail-lbl">Days Left</span><span class="detail-val">'+daysLeft+' days</span></div>'
+    +'<div class="detail-row"><span class="detail-lbl">Days Left</span><span class="detail-val">'+daysLeft+'</span></div>'
     +'<div class="detail-row" style="border-bottom:none;"><span class="detail-lbl">Total Visits</span><span class="visit-big">'+m.visits+'</span></div>'
     +'<div class="bar-track"><div class="bar-fill" style="width:'+Math.min(100,m.visits*5)+'%;"></div></div>'
     +'<div class="action-grid">'
@@ -676,36 +640,51 @@ function selectMember(id){
 function recordVisit(id){
   var m=members.find(function(x){return x.id===id;}); if(!m) return;
   if(!m.isActive){ showToast('Membership inactive!','error'); return; }
-  m.visits++; saveLocal(); updateStats(); selectMember(id);
-  if(scriptUrl) syncNow();
-  showToast('Visit recorded! Total: '+m.visits);
+  m.visits++;
+  updateStats(); selectMember(id);
+  showToast('Visit recorded! Saving to Sheet...');
+  sheetUpdateMember({id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',
+    joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),
+    visits:m.visits,isActive:m.isActive}, function(res){
+    if(res&&res.success) showToast('Visit saved! Total: '+m.visits);
+    else showToast('Visit saved locally. Sheet sync error.','error');
+  });
 }
+
 function deactivateMember(id){
   var m=members.find(function(x){return x.id===id;}); if(!m) return;
-  m.isActive=false; saveLocal(); updateStats(); selectMember(id);
-  if(scriptUrl) syncNow();
-  showToast(m.name+' deactivated.');
+  m.isActive=false; updateStats(); selectMember(id);
+  sheetUpdateMember({id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',
+    joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),
+    visits:m.visits,isActive:false}, function(res){
+    showToast(m.name+' deactivated!'+(res&&res.success?'':' (Sheet sync check karo)'));
+  });
 }
+
 function checkExpired(){
-  var now=new Date(); var count=0;
-  members.forEach(function(m){ if(now>new Date(m.expiry)&&m.isActive){ m.isActive=false; count++; } });
-  saveLocal(); updateStats();
+  var now=new Date(); var changed=[];
+  members.forEach(function(m){ if(now>new Date(m.expiry)&&m.isActive){ m.isActive=false; changed.push(m); } });
+  updateStats();
   if(selectedId) selectMember(selectedId);
   filterMembers('');
-  if(scriptUrl&&count>0) syncNow();
-  showToast(count>0?count+' member(s) expired!':'Sagle memberships ok!');
+  if(changed.length===0){ showToast('Sagle memberships ok!'); return; }
+  showToast(changed.length+' member(s) expired! Saving to Sheet...');
+  var toSave=members.map(function(m){return{id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:m.visits,isActive:m.isActive};});
+  sheetSaveAll(toSave,function(res){
+    showToast(changed.length+' expired'+(res&&res.success?' · Sheet updated!':' · Sheet sync failed!'));
+  });
 }
 
 // ===== MODAL =====
 function openModal(action, memberId){
-  currentAction=action; actionMemberId=memberId||null;
+  currentAction=action; actionId=memberId||null;
   var titleEl=document.getElementById('modal-title-text');
   var bodyEl=document.getElementById('modal-body');
   var saveBtn=document.getElementById('modal-save-btn');
   var overlay=document.getElementById('modal-overlay');
   if(!titleEl||!bodyEl||!overlay) return;
 
-  if(action==='register'){
+  if(action==='add'){
     titleEl.textContent='Add New Member';
     saveBtn.textContent='Register Member';
     bodyEl.innerHTML='<div class="form-row"><div class="form-group"><label class="form-label">Member ID</label><input class="form-input" type="number" id="inp-id" placeholder="e.g. 101"></div><div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="inp-age" placeholder="Min. 16"></div></div><div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="inp-name" placeholder="Member\'s full name"></div><div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="inp-phone" placeholder="Mobile number"></div><div class="form-group"><label class="form-label">Plan</label><select class="form-select" id="inp-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
@@ -713,71 +692,118 @@ function openModal(action, memberId){
     var m=members.find(function(x){return x.id===memberId;});
     titleEl.textContent='Renew Membership';
     saveBtn.textContent='Renew +30 Days';
-    bodyEl.innerHTML='<div class="info-box"><div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div><div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan+' Plan':'')+' · Expiry: '+(m?fmtDate(m.expiry):'')+'</div></div><div style="color:#888;font-size:13px;">30 days extend hoil aani member reactivate hoil.</div>';
+    bodyEl.innerHTML='<div class="info-box"><div style="color:#ddd;font-size:14px;font-weight:bold;">'+(m?m.name:'')+'</div><div style="color:#666;font-size:12px;margin-top:3px;">'+(m?m.plan:'')+' · Expiry: '+(m?fmtDate(m.expiry):'')+'</div></div><div style="color:#888;font-size:13px;">30 days extend hoil. Sheet var save hoil.</div>';
   } else if(action==='upgrade'){
     titleEl.textContent='Upgrade Plan';
     saveBtn.textContent='Update Plan';
-    bodyEl.innerHTML='<div class="form-group"><label class="form-label">New Plan</label><select class="form-select" id="inp-upgrade-plan"><option value="">Select plan...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
+    bodyEl.innerHTML='<div class="form-group"><label class="form-label">New Plan</label><select class="form-select" id="inp-upgrade-plan"><option value="">Select...</option><option value="Basic">Basic - Rs.999/month</option><option value="Premium">Premium - Rs.1,799/month</option><option value="Elite">Elite - Rs.2,999/month</option></select></div>';
   } else if(action==='settings'){
     titleEl.textContent='Google Sheets Settings';
     saveBtn.textContent='Save & Connect';
-    bodyEl.innerHTML='<div style="background:#111;border:1px solid #2a2a2a;border-radius:8px;padding:14px;margin-bottom:14px;font-size:12px;color:#888;line-height:1.8;"><b style="color:#c8a84b;">Setup Steps:</b><br>1. Google Sheets → Extensions → Apps Script<br>2. Code paste karo → Save<br>3. Deploy → New Deployment → Web App<br>4. Execute as: Me | Access: Anyone<br>5. Deploy → URL copy karo</div><div class="form-group"><label class="form-label">Apps Script Web App URL</label><input class="form-input" id="inp-url" placeholder="https://script.google.com/macros/s/..." value="'+scriptUrl+'"></div>';
+    bodyEl.innerHTML='<div style="background:#111;border:1px solid #2a2a2a;border-radius:8px;padding:14px;margin-bottom:14px;font-size:12px;color:#888;line-height:1.9;"><b style="color:#c8a84b;">Apps Script Update Steps:</b><br>1. Apps Script open karo<br>2. Navin code paste karo (Claude ne dila aahe)<br>3. Deploy → Manage Deployments → Edit → New Version → Deploy<br>4. Same URL use karo — change hot nahi!</div><div class="form-group"><label class="form-label">Apps Script Web App URL</label><input class="form-input" id="inp-url" placeholder="https://script.google.com/macros/s/..." value="'+scriptUrl+'"></div>';
   }
   overlay.classList.add('show');
 }
+
 function closeModal(){ var o=document.getElementById('modal-overlay'); if(o) o.classList.remove('show'); }
 
-function handleModalSave(){
-  if(currentAction==='register'){
+function handleSave(){
+  if(currentAction==='add'){
     var id=parseInt((document.getElementById('inp-id')||{}).value||0);
     var age=parseInt((document.getElementById('inp-age')||{}).value||0);
     var name=((document.getElementById('inp-name')||{}).value||'').trim();
     var phone=((document.getElementById('inp-phone')||{}).value||'').trim();
     var plan=((document.getElementById('inp-plan')||{}).value||'');
-    if(!id||id<=0){ showToast('Valid ID enter karo!','error'); return; }
+    if(!id||id<=0){ showToast('Valid ID bhara!','error'); return; }
     if(members.find(function(m){return m.id===id;})){ showToast('ID already exists!','error'); return; }
-    if(!name){ showToast('Name enter karo!','error'); return; }
-    if(!age||age<16){ showToast('Age 16+ pahije!','error'); return; }
+    if(!name){ showToast('Name bhara!','error'); return; }
+    if(!age||age<16){ showToast('Age 16+!','error'); return; }
     if(!plan){ showToast('Plan select karo!','error'); return; }
     var now=new Date(); var exp=new Date(now); exp.setDate(exp.getDate()+30);
-    members.push({id:id,name:name,age:age,plan:plan,phone:phone,joinDate:now,expiry:exp,visits:0,isActive:true});
-    saveLocal(); updateStats(); filterMembers(''); closeModal();
-    if(scriptUrl) syncNow();
-    showToast(name+' registered!');
+    var m={id:id,name:name,age:age,plan:plan,phone:phone,joinDate:now.toISOString(),expiry:exp.toISOString(),visits:0,isActive:true};
+    closeModal();
+    showToast('Sheet var save hoto aahe...','info');
+    sheetAddMember(m, function(res){
+      if(res&&res.success){
+        members.push(parseMember(m)); updateStats(); filterMembers('');
+        showToast(name+' registered & saved to Sheet!');
+      } else {
+        showToast('Save failed: '+(res&&res.error||'Check URL'),'error');
+      }
+    });
   } else if(currentAction==='renew'){
-    var m=members.find(function(x){return x.id===actionMemberId;});
-    if(m){ var newExp=new Date(m.expiry); newExp.setDate(newExp.getDate()+30); m.expiry=newExp; m.isActive=true; saveLocal(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); if(scriptUrl)syncNow(); showToast('Membership renewed!'); }
+    var m=members.find(function(x){return x.id===actionId;}); if(!m) return;
+    var newExp=new Date(m.expiry); newExp.setDate(newExp.getDate()+30); m.expiry=newExp; m.isActive=true;
+    updateStats(); if(selectedId===m.id) selectMember(m.id); closeModal();
+    sheetUpdateMember({id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:m.visits,isActive:true}, function(res){
+      showToast('Renewed!'+(res&&res.success?' Sheet updated!':' Sheet sync check karo.'));
+    });
   } else if(currentAction==='upgrade'){
     var np=((document.getElementById('inp-upgrade-plan')||{}).value||'');
     if(!np){ showToast('Plan select karo!','error'); return; }
-    var m=members.find(function(x){return x.id===actionMemberId;});
-    if(m){ m.plan=np; saveLocal(); updateStats(); if(selectedId===m.id)selectMember(m.id); closeModal(); if(scriptUrl)syncNow(); showToast('Plan upgraded to '+np+'!'); }
+    var m=members.find(function(x){return x.id===actionId;}); if(!m) return;
+    m.plan=np; updateStats(); if(selectedId===m.id) selectMember(m.id); closeModal();
+    sheetUpdateMember({id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:m.visits,isActive:m.isActive}, function(res){
+      showToast('Upgraded to '+np+'!'+(res&&res.success?' Sheet updated!':' Sheet sync check karo.'));
+    });
   } else if(currentAction==='settings'){
     var url=((document.getElementById('inp-url')||{}).value||'').trim();
-    if(!url){ showToast('URL enter karo!','error'); return; }
+    if(!url){ showToast('URL bhara!','error'); return; }
     scriptUrl=url; lsSet('pf_script_url',url); closeModal();
-    var b=document.getElementById('setup-banner'); if(b) b.style.display='none';
-    var sc=document.getElementById('connection-sub'); if(sc) sc.textContent='Perfect Fitness — Google Sheets connected!';
-    loadFromSheet();
+    updateSheetStatus();
+    adminLoadSheet();
   }
 }
 
-function setActiveNav(el){
-  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
-  el.classList.add('active');
+// ===== EXPORT / IMPORT =====
+function exportData(){
+  var blob=new Blob([JSON.stringify({gym:'Perfect Fitness',members:members.map(function(m){return{id:m.id,name:m.name,age:m.age,plan:m.plan,phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:m.visits,isActive:m.isActive};}),exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='gym_backup_'+Date.now()+'.json'; a.click();
+  showToast('Backup exported!');
+}
+function importData(event){
+  var file=event.target.files[0]; if(!file) return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result); var arr=data.members||data;
+      var toSave=arr.map(function(m){return{id:parseInt(m.id)||m.id,name:String(m.name),age:parseInt(m.age),plan:String(m.plan),phone:m.phone||'',joinDate:new Date(m.joinDate).toISOString(),expiry:new Date(m.expiry).toISOString(),visits:parseInt(m.visits)||0,isActive:m.isActive===true||String(m.isActive).toUpperCase()==='TRUE'};});
+      showToast('Sheet var upload hoto aahe...','info');
+      sheetSaveAll(toSave,function(res){
+        if(res&&res.success){ members=toSave.map(parseMember); updateStats(); filterMembers(''); showToast(members.length+' members imported to Sheet!'); }
+        else { showToast('Import failed!','error'); }
+      });
+    }catch(err){ showToast('Invalid file!','error'); }
+  };
+  reader.readAsText(file); event.target.value='';
+}
+
+function setNav(el){ document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');}); el.classList.add('active'); }
+
+// ===== TOAST =====
+function showToast(msg,type){
+  var t=document.getElementById('toast'); var m=document.getElementById('toast-msg'); var i=document.getElementById('toast-icon');
+  if(!t||!m) return;
+  m.textContent=msg;
+  if(i) i.className='ti '+(type==='error'?'ti-alert-circle':type==='info'?'ti-info-circle':'ti-circle-check');
+  t.className='toast show'+(type?' '+type:'');
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.className='toast';},3500);
 }
 
 // ===== INIT =====
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded',function(){
   var overlay=document.getElementById('modal-overlay');
-  if(overlay) overlay.addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+  if(overlay) overlay.addEventListener('click',function(e){if(e.target===this)closeModal();});
   var passInput=document.getElementById('admin-pass');
-  if(passInput) passInput.addEventListener('keydown',function(e){ if(e.key==='Enter') doAdminLogin(); });
-  // Check session
-  if(lsGet('pf_admin_session')==='1'){
+  if(passInput) passInput.addEventListener('keydown',function(e){if(e.key==='Enter')doAdminLogin();});
+
+  scriptUrl=lsGet('pf_script_url');
+
+  if(lsGet('pf_session')==='1'){
     showPage('admin');
-    loadLocal(); initScriptUrl(); updateStats(); filterMembers('');
-    if(members.length>0) showToast(members.length+' members loaded!');
+    updateSheetStatus();
+    if(scriptUrl) adminLoadSheet();
   } else {
     showPage('login');
   }
